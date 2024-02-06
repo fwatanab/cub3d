@@ -1,12 +1,81 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/03 19:06:24 by fwatanab          #+#    #+#             */
+/*   Updated: 2024/02/06 17:58:19 by fwatanab         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3d.h"
 
-void	read_map(char *file_name)
+size_t	ft_strnlen(char *str)
 {
-	int	fd;
+	size_t	i;
 
-	fd = open(file_name, O_RDONLY);
+	i = 0;
+	while (str[i] && str[i] != '\n')
+		i++;
+	return (i);
+}
+
+size_t	map_size(char *file)
+{
+	int		fd;
+	size_t	len;
+	char	*line;
+
+	len = 0;
+	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		return (1);
-	
-	return ;
+		error("Error: Failed to open the file.");
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		free(line);
+		len++;
+	}
+	close(fd);
+	return (len);
+}
+
+char	**input_file(char *file)
+{
+	int		fd;
+	char	*line;
+	char	**str;
+	size_t	i;
+
+	str = malloc(sizeof(char *) * map_size(file));
+	if (!str)
+		error("Error: Malloc failure.");
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+	{
+		free(str);
+		error("Error: Failed to open the file.");
+	}
+	i = 0;
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		str[i] = ft_strndup(line, ft_strnlen(line));
+		free(line);
+		if (!str[i])
+		{
+			array_free(str);
+			error("Error: Malloc failure.");
+		}
+		printf("->%s\n", str[i]);
+		i++;
+	}
+	close(fd);
+	return (str);
 }

@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/03 19:06:09 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/07 01:37:24 by fwatanab         ###   ########.fr       */
+/*   Created: 2024/02/04 19:02:13 by fwatanab          #+#    #+#             */
+/*   Updated: 2024/02/04 20:28:18 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	main(int argc, char **argv)
+void	error(char *str)
 {
-//	t_vars	vars;
-	t_map	*conf;
-
-	if (argc != 2)
-		error("Error: Invalid number of arguments.");
-	conf = parser(argv);
-	parser_print(conf);
-	map_free(conf);
-//	vars.mlx = mlx_init();
-//	vars.mlx_win = mlx_new_window(vars.mlx, 1400, 700, "cub3d");
-//	mlx_loop(vars.mlx);
-	system("leaks -q cub3d");
-	return (0);
+	ft_printf("%s\n", str);
+	exit(EXIT_FAILURE);
 }
 
+void	array_free(char **str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		free(str[i++]);
+	free(str);
+}

@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/03 19:06:09 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/07 01:37:24 by fwatanab         ###   ########.fr       */
+/*   Created: 2024/02/06 18:54:40 by fwatanab          #+#    #+#             */
+/*   Updated: 2024/02/07 01:29:54 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	main(int argc, char **argv)
+void	parser_print(t_map *conf)
 {
-//	t_vars	vars;
-	t_map	*conf;
-
-	if (argc != 2)
-		error("Error: Invalid number of arguments.");
-	conf = parser(argv);
-	parser_print(conf);
-	map_free(conf);
-//	vars.mlx = mlx_init();
-//	vars.mlx_win = mlx_new_window(vars.mlx, 1400, 700, "cub3d");
-//	mlx_loop(vars.mlx);
-	system("leaks -q cub3d");
-	return (0);
+	printf("---------------------------------------------\n");
+	printf("NO = %s\n", conf->no);
+	printf("SO = %s\n", conf->so);
+	printf("WE = %s\n", conf->we);
+	printf("EA = %s\n\n", conf->ea);
+	printf("F = %d,%d,%d\n", conf->f->r, conf->f->g, conf->f->b);
+	printf("C = %d,%d,%d\n", conf->c->r, conf->c->g, conf->c->b);
 }
-
