@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:35:47 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/07 09:53:42 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/07 09:58:22 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,36 +38,6 @@ static char	*get_key_value(char **file, char *key)
 	return (NULL);
 }
 
-size_t	count_semicolon(char *str)
-{
-	size_t	count;
-
-	count = 0;
-	while (*str)
-	{
-		if (*str == ',')
-			count++;
-		str++;
-	}
-	return (count);
-}
-
-static void	change_rgb(t_rgb *rgb, char *str)
-{
-	char	**result;
-	size_t	i;
-
-	result = ft_split(str, ',');
-	i = 0;
-	if (result)
-		rgb->r = ft_atoi(result[i++]);
-	if (result)
-		rgb->g = ft_atoi(result[i++]);
-	if (result)
-		rgb->b = ft_atoi(result[i]);
-	array_free(result);
-}
-
 static t_rgb	*parse_rgb(char **file, char *key)
 {
 	t_rgb	*rgb;
@@ -84,53 +54,6 @@ static t_rgb	*parse_rgb(char **file, char *key)
 	}
 	change_rgb(rgb, str);
 	return (rgb);
-}
-
-bool	str_all_one(char *str)
-{
-	while (*str)
-	{
-		if (*str != '1' && *str != ' ')
-			return (false);
-		str++;
-	}
-	return (true);
-}
-
-size_t	array_len(char **str)
-{
-	size_t	len;
-
-	len = 0;
-	while (str[len])
-		len++;
-	return (len);
-}
-
-char	**input_map(char **str)
-{
-	char	**map;
-	size_t	map_size;
-	size_t	i;
-
-	map_size = array_len(str);
-	map = malloc(sizeof(char *) * map_size + 1);
-	if (!map)
-		error("Error: Malloc failure.");
-	i = 0;
-	while (*str)
-	{
-		map[i] = ft_strdup(*str);
-		if (!map[i])
-		{
-			array_free(map);
-			return (NULL);
-		}
-		i++;
-		str++;
-	}
-	return (map);
-
 }
 
 char	**parse_map(char **file)

@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:14:57 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/07 01:35:10 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/07 09:58:09 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@ typedef struct s_player
 
 char	**input_file(char *file);
 t_map	*parser(char **argv);
+void	change_rgb(t_rgb *rgb, char *str);
+size_t	count_semicolon(char *str);
+bool	str_all_one(char *str);
+size_t	array_len(char **str);
+char	**input_map(char **str);
 
 //init
 t_vars	*vars_init();
