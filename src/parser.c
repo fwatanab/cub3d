@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:35:47 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/07 09:58:22 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/07 16:02:04 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static t_rgb	*parse_rgb(char **file, char *key)
 		return (NULL);
 	}
 	change_rgb(rgb, str);
+	free(str);
 	return (rgb);
 }
 
