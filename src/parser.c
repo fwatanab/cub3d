@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:35:47 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/07 01:30:52 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/07 09:53:42 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,69 @@ static t_rgb	*parse_rgb(char **file, char *key)
 	return (rgb);
 }
 
+bool	str_all_one(char *str)
+{
+	while (*str)
+	{
+		if (*str != '1' && *str != ' ')
+			return (false);
+		str++;
+	}
+	return (true);
+}
+
+size_t	array_len(char **str)
+{
+	size_t	len;
+
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
+}
+
+char	**input_map(char **str)
+{
+	char	**map;
+	size_t	map_size;
+	size_t	i;
+
+	map_size = array_len(str);
+	map = malloc(sizeof(char *) * map_size + 1);
+	if (!map)
+		error("Error: Malloc failure.");
+	i = 0;
+	while (*str)
+	{
+		map[i] = ft_strdup(*str);
+		if (!map[i])
+		{
+			array_free(map);
+			return (NULL);
+		}
+		i++;
+		str++;
+	}
+	return (map);
+
+}
+
+char	**parse_map(char **file)
+{
+	char	**map;
+
+	while (*file)
+	{
+		if (str_all_one(*file))
+		{
+			map = input_map(file);
+			return (map);
+		}
+		file++;
+	}
+	return (NULL);
+}
+
 t_map	*parser(char **argv)
 {
 	t_map	*conf;
@@ -104,6 +167,7 @@ t_map	*parser(char **argv)
 	conf->ea = get_key_value(file, "EA");
 	conf->f = parse_rgb(file, "F");
 	conf->c = parse_rgb(file, "C");
+	conf->map = parse_map(file);
 	array_free(file);
 	return (conf);
 }
