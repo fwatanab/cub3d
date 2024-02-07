@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:06:24 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/06 17:58:19 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/07 17:28:17 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	**input_file(char *file)
 	char	**str;
 	size_t	i;
 
-	str = malloc(sizeof(char *) * map_size(file));
+	str = malloc(sizeof(char *) * (map_size(file) + 1));
 	if (!str)
 		error("Error: Malloc failure.");
 	fd = open(file, O_RDONLY);
@@ -76,6 +76,7 @@ char	**input_file(char *file)
 		printf("->%s\n", str[i]);
 		i++;
 	}
+	str[i] = NULL;
 	close(fd);
 	return (str);
 }

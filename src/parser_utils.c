@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 09:56:25 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/07 09:58:21 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/07 17:29:30 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/cub3d.h"
@@ -52,7 +52,7 @@ bool	str_all_one(char *str)
 	return (true);
 }
 
-size_t	array_len(char **str)
+size_t	array_size(char **str)
 {
 	size_t	len;
 
@@ -65,11 +65,9 @@ size_t	array_len(char **str)
 char	**input_map(char **str)
 {
 	char	**map;
-	size_t	map_size;
 	size_t	i;
 
-	map_size = array_len(str);
-	map = malloc(sizeof(char *) * map_size + 1);
+	map = malloc(sizeof(char *) * (array_size(str) + 1));
 	if (!map)
 		error("Error: Malloc failure.");
 	i = 0;
@@ -84,6 +82,7 @@ char	**input_map(char **str)
 		i++;
 		str++;
 	}
+	map[i] = NULL;
 	return (map);
 
 }

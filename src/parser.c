@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:35:47 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/07 16:02:04 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/07 17:18:22 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ static char	*get_key_value(char **file, char *key)
 		if (ft_strncmp(file[i], key, key_len) == 0)
 		{
 			str = file[i] + key_len;
-			while (*str == ' ' || *str == '\t' || *str == '\n'
-					|| *str == '\v' || *str == '\f' || *str == '\r')
+			while (*str == ' ' || *str == '\t' || *str == '\n' || *str == '\v' || *str == '\f' || *str == '\r')
 				str++;
 			result = ft_strdup(str);
 			return (result);
