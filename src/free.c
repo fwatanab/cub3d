@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 01:32:03 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/07 01:38:52 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/07 09:45:18 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,7 @@ void	map_free(t_map *conf)
 		free(conf->f);
 	if (conf->c)
 		free(conf->c);
+	if (conf->map)
+		array_free(conf->map);
 	free(conf);
 }
