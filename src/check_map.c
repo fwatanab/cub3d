@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:06:24 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/07 17:28:17 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/08 16:35:01 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ char	**input_file(char *file)
 			array_free(str);
 			error("Error: Malloc failure.");
 		}
-		printf("->%s\n", str[i]);
 		i++;
 	}
 	str[i] = NULL;
