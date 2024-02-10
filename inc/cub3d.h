@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:14:57 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/07 09:58:09 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/10 23:06:32 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,16 @@ typedef struct t_map
 	char			**map;
 }	t_map;
 
+typedef struct s_camera
+{
+	int	dir_x;    // プレイヤーの方向ベクトルのX成分
+	int	dir_y;    // プレイヤーの方向ベクトルのY成分
+	int	plane_x;  // カメラ平面のXベクトル成分（視野角に影響）
+	int	plane_y;  // カメラ平面のYベクトル成分（視野角に影響）
+	int	pos_x;    // プレイヤーのX座標
+	int	pos_y;    // プレイヤーのY座標
+}	t_camera;
+
 typedef struct s_player
 {
 	char	angle;
@@ -61,7 +71,8 @@ size_t	array_len(char **str);
 char	**input_map(char **str);
 
 //init
-t_vars	*vars_init();
+t_vars		*vars_init();
+t_camera	*init_player(t_map *conf);
 
 //error_free
 void	error(char *str);
