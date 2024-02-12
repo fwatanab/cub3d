@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:14:57 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/07 09:58:09 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/12 03:33:25 by stakimot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../libft/inc/libft.h"
 # include "../minilibx/mlx.h"
-# include "../minilibx/mlx_int.h"
+// # include "../minilibx/mlx_int.h"
 //# include "mlx.h" // 42 iMac
 # include <fcntl.h>
 # include <stdbool.h>
@@ -62,6 +62,9 @@ char	**input_map(char **str);
 
 //init
 t_vars	*vars_init();
+
+//map_error_check
+bool	map_error_check(t_map *conf);
 
 //error_free
 void	error(char *str);
