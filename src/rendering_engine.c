@@ -1,10 +1,12 @@
 #include "../inc/cub3d.h"
 
-void	calculate_ray_direction(t_ray *ray, t_camera *player, int screen_width, int x)
+void	calculate_ray_direction(t_ray *ray, t_camera *player)
 {
 	double	camera_x;
+	int		x;
 
-	camera_x = 2 * x / (double)screen_width -1;
+	x = WIN_WIDTH / 2;
+	camera_x = 2 * x / (double)WIN_WIDTH -1;
 	ray->dir_x = player->dir_x + player->plane_x * camera_x;
 	ray->dir_y = player->dir_y + player->plane_y * camera_x;
 	printf("Ray Direction for screen x=%d: (%f, %f)\n", x, ray->dir_x, ray->dir_y);
