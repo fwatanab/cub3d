@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:14:57 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/12 16:37:57 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/12 17:30:13 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,14 @@ typedef struct t_map
 	char			**map;
 }	t_map;
 
+typedef struct s_texture
+{
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+}	t_texture;
+
 typedef struct s_camera
 {
 	double	dir_x;    // プレイヤーの方向ベクトルのX成分
@@ -82,11 +90,13 @@ size_t	array_len(char **str);
 char	**input_map(char **str);
 void	calculate_ray_direction(t_ray *ray, t_camera *player);
 void	perform_dda(t_camera *player, t_ray *ray, t_map *conf);
+void	draw_wall(t_vars vars, double wall_dist);
 
 //init
 t_vars		*vars_init();
 t_camera	*init_player(t_map *conf);
 t_ray		*init_ray(void);
+t_texture	load_texture(t_vars vars, t_map *conf);
 
 //error_free
 void	error(char *str);

@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:21:55 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/12 16:24:34 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/12 17:33:45 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,15 @@ t_ray	*init_ray(void)
 	if (!ray)
 		error("Error: Malloc failure.");
 	return (ray);
+}
+
+t_texture	load_texture(t_vars vars, t_map *conf)
+{
+	t_texture	tex;
+
+	tex.no = mlx_xpm_file_to_image(vars.mlx, conf->no, (int *)60, (int *)60);
+	tex.so = mlx_xpm_file_to_image(vars.mlx, conf->so, (int *)60, (int *)60);
+	tex.we = mlx_xpm_file_to_image(vars.mlx, conf->we, (int *)60, (int *)60);
+	tex.ea = mlx_xpm_file_to_image(vars.mlx, conf->ea, (int *)60, (int *)60);
+	return (tex);
 }
