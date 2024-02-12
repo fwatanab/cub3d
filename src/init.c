@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:21:55 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/10 23:17:21 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/12 16:24:34 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,18 @@ t_camera	*init_player(t_map *conf)
 	player->pos_x = search_player(conf->map, 1);
 	player->pos_y = search_player(conf->map, 0);
 	player->dir_x = -1;
-	player->dir_y = -1;
+	player->dir_y = 0;
 	player->plane_x = 0;
 	player->plane_y = 1;
 	return (player);
+}
+
+t_ray	*init_ray(void)
+{
+	t_ray	*ray;
+
+	ray = malloc(sizeof(t_ray));
+	if (!ray)
+		error("Error: Malloc failure.");
+	return (ray);
 }
