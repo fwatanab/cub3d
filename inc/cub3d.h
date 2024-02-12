@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:14:57 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/10 23:06:32 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/12 16:24:19 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "../minilibx/mlx.h"
 # include "../minilibx/mlx_int.h"
 //# include "mlx.h" // 42 iMac
+# include <math.h>
 # include <fcntl.h>
 # include <stdbool.h>
 # include <stdio.h>
@@ -47,20 +48,27 @@ typedef struct t_map
 
 typedef struct s_camera
 {
-	int	dir_x;    // プレイヤーの方向ベクトルのX成分
-	int	dir_y;    // プレイヤーの方向ベクトルのY成分
-	int	plane_x;  // カメラ平面のXベクトル成分（視野角に影響）
-	int	plane_y;  // カメラ平面のYベクトル成分（視野角に影響）
-	int	pos_x;    // プレイヤーのX座標
-	int	pos_y;    // プレイヤーのY座標
+	double	dir_x;    // プレイヤーの方向ベクトルのX成分
+	double	dir_y;    // プレイヤーの方向ベクトルのY成分
+	double	plane_x;  // カメラ平面のXベクトル成分（視野角に影響）
+	double	plane_y;  // カメラ平面のYベクトル成分（視野角に影響）
+	double	pos_x;    // プレイヤーのX座標
+	double	pos_y;    // プレイヤーのY座標
 }	t_camera;
 
-typedef struct s_player
+typedef struct s_ray
 {
-	char	angle;
-	int		p_x;
-	int		p_y;
-}	t_player;
+	double	dir_x;
+	double	dir_y;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	int		step_x;
+	int		step_y;
+}	t_ray;
 
 char	**input_file(char *file);
 t_map	*parser(char **argv);
@@ -69,10 +77,13 @@ size_t	count_semicolon(char *str);
 bool	str_all_one(char *str);
 size_t	array_len(char **str);
 char	**input_map(char **str);
+void	calculate_ray_direction(t_ray *ray, t_camera *player, int screen_width, int x);
+void	perform_dda(t_camera *player, t_ray *ray, t_map *conf);
 
 //init
 t_vars		*vars_init();
 t_camera	*init_player(t_map *conf);
+t_ray		*init_ray(void);
 
 //error_free
 void	error(char *str);
