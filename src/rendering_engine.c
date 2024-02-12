@@ -1,18 +1,13 @@
 #include "../inc/cub3d.h"
 
-t_ray	*calculate_ray_direction(t_camera *player, int screen_width, int x)
+void	calculate_ray_direction(t_ray *ray, t_camera *player, int screen_width, int x)
 {
-	t_ray	*ray;
 	double	camera_x;
 
-	ray = malloc(sizeof(t_ray));
-	if (!ray)
-		error("Error: Malloc failure.");
 	camera_x = 2 * x / (double)screen_width -1;
 	ray->dir_x = player->dir_x + player->plane_x * camera_x;
 	ray->dir_y = player->dir_y + player->plane_y * camera_x;
 	printf("Ray Direction for screen x=%d: (%f, %f)\n", x, ray->dir_x, ray->dir_y);
-	return (ray);
 }
 
 void	execute_dda(t_ray *ray, t_map *conf)
