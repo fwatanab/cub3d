@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:06:09 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/12 16:28:06 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/12 16:37:52 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ int	main(int argc, char **argv)
 	conf = parser(argv);
 	player = init_player(conf);
 	ray = init_ray();
-	int	screen = 600;
-	calculate_ray_direction(ray, player, screen, screen / 2);
+	calculate_ray_direction(ray, player);
 	perform_dda(player, ray, conf);
 	vars.mlx = mlx_init();
 	vars.mlx_win = mlx_new_window(vars.mlx, 1400, 700, "cub3d");
