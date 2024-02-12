@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:14:57 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/12 16:24:19 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/12 16:37:57 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include <fcntl.h>
 # include <stdbool.h>
 # include <stdio.h>
+
+#define WIN_WIDTH 640
+#define WIN_HEIGHT 480
 
 typedef struct s_vars
 {
@@ -77,7 +80,7 @@ size_t	count_semicolon(char *str);
 bool	str_all_one(char *str);
 size_t	array_len(char **str);
 char	**input_map(char **str);
-void	calculate_ray_direction(t_ray *ray, t_camera *player, int screen_width, int x);
+void	calculate_ray_direction(t_ray *ray, t_camera *player);
 void	perform_dda(t_camera *player, t_ray *ray, t_map *conf);
 
 //init
