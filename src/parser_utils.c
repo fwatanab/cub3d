@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 09:56:25 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/07 17:54:12 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:06:18 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/cub3d.h"
@@ -40,29 +40,6 @@ void	change_rgb(t_rgb *rgb, char *str)
 		rgb->b = ft_atoi(result[i]);
 	array_free(result);
 }
-
-bool	str_all_one(char *str)
-{
-	size_t	count;
-
-	count = 0;
-	if (!str)
-		return (false);
-	while (*str)
-	{
-		if (!(*str == '1' || *str == ' '))
-		{
-			return (false);
-		}
-		else if (*str == '1')
-			count++;
-		str++;
-	}
-	if (!count)
-		return (false);
-	return (true);
-}
-
 size_t	array_size(char **str)
 {
 	size_t	len;
