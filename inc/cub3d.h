@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:14:57 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/15 18:21:37 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/15 20:32:58 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,9 @@
 # include <stdbool.h>
 # include <stdio.h>
 
-#define WIN_WIDTH 640
-#define WIN_HEIGHT 480
-
-typedef struct s_vars
-{
-	void	*mlx;
-	void	*mlx_win;
-}	t_vars;
+#define WIN_WIDTH 1200
+#define WIN_HEIGHT 800
+#define BLOCK_SIZE 1.0
 
 typedef struct s_rgb
 {
@@ -44,18 +39,10 @@ typedef struct t_map
 	char			*so;
 	char			*we;
 	char			*ea;
-	struct s_rgb	*f;
-	struct s_rgb	*c;
+	t_rgb			*f;
+	t_rgb			*c;
 	char			**map;
 }	t_map;
-
-typedef struct s_texture
-{
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-}	t_texture;
 
 typedef struct s_camera
 {
@@ -66,6 +53,31 @@ typedef struct s_camera
 	double	pos_x;
 	double	pos_y;
 }	t_camera;
+
+typedef struct s_vars
+{
+	void			*mlx;
+	void			*mlx_win;
+	t_map			*conf;
+	t_camera		*player;
+}	t_vars;
+
+typedef struct s_tex_img
+{
+	void	*img_ptr;  // 画像ポインタ
+	char	*addr;     // 画像のピクセルデータへのポインタ
+	int		bpp;       // 画像のビット深度（ビット/ピクセル）
+	int		line_length; // 画像の一行の長さ（バイト）
+	int		endian;    // エンディアン
+}	t_tex_img;
+
+typedef struct s_texture
+{
+	t_tex_img	no;
+	t_tex_img	so;
+	t_tex_img	we;
+	t_tex_img	ea;
+}	t_texture;
 
 typedef struct s_ray
 {
@@ -89,9 +101,11 @@ size_t	count_semicolon(char *str);
 bool	str_all_one(char *str);
 size_t	array_len(char **str);
 char	**input_map(char **str);
-void	calculate_ray_direction(t_ray *ray, t_camera *player);
-void	perform_dda(t_camera *player, t_ray *ray, t_map *conf, t_vars vars);
-void	draw_wall(t_vars vars, t_ray *ray, t_camera *player);
+void	calculate_ray_direction(t_ray *ray, t_camera *player, int x);
+void	perform_dda(t_camera *player, t_ray *ray, t_map *conf);
+double	get_wall_dist(t_ray *ray, t_camera *player);
+void	draw_wall(t_vars vars, int x, double wall_dist);
+int		get_texture_color(t_img *tex, int x, int y);
 
 //init
 t_vars		*vars_init();
