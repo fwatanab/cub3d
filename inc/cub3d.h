@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:14:57 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/12 17:30:13 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:12:37 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ typedef struct s_texture
 
 typedef struct s_camera
 {
-	double	dir_x;    // プレイヤーの方向ベクトルのX成分
-	double	dir_y;    // プレイヤーの方向ベクトルのY成分
-	double	plane_x;  // カメラ平面のXベクトル成分（視野角に影響）
-	double	plane_y;  // カメラ平面のYベクトル成分（視野角に影響）
-	double	pos_x;    // プレイヤーのX座標
-	double	pos_y;    // プレイヤーのY座標
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	pos_x;
+	double	pos_y;
 }	t_camera;
 
 typedef struct s_ray
