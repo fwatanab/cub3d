@@ -15,7 +15,6 @@ void	calculate_ray_direction(t_ray *ray, t_camera *player)
 void	execute_dda(t_ray *ray, t_map *conf)
 {
 	int	hit;
-	int	side;
 
 	hit = 0;
 	while (hit == 0)
@@ -24,21 +23,20 @@ void	execute_dda(t_ray *ray, t_map *conf)
 		{
 			ray->side_dist_x += ray->delta_dist_x;
 			ray->map_x += ray->step_x;
-			side = 0;
+			ray->side = 0;
 		}
 		else
 		{
 			ray->side_dist_y += ray->delta_dist_y;
 			ray->map_y += ray->step_y;
-			side = 1;
+			ray->side = 1;
 		}
 		if (conf->map[ray->map_x][ray->map_y] > 0)
 			hit = 1;
 	}
-	printf("Ray hit a wall at map square (%d,%d) on the %s side.\n", ray->map_x, ray->map_y, side == 0 ? "X" : "Y");
 }
 
-void	perform_dda(t_camera *player, t_ray *ray, t_map *conf)
+void	perform_dda(t_camera *player, t_ray *ray, t_map *conf, t_vars vars)
 {
 	ray->map_x = (int)player->pos_x;
 	ray->map_y = (int)player->pos_y;
@@ -63,4 +61,5 @@ void	perform_dda(t_camera *player, t_ray *ray, t_map *conf)
 		ray->side_dist_y = (ray->map_y + 1.0 - player->pos_y) * ray->delta_dist_y;
 	}
 	execute_dda(ray, conf);
+	draw_wall(vars, ray, player);
 }
