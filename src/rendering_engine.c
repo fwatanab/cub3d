@@ -1,15 +1,12 @@
 #include "../inc/cub3d.h"
 
-void	calculate_ray_direction(t_ray *ray, t_camera *player)
+void	calculate_ray_direction(t_ray *ray, t_camera *player, int x)
 {
 	double	camera_x;
-	int		x;
 
-	x = WIN_WIDTH / 2;
 	camera_x = 2 * x / (double)WIN_WIDTH -1;
 	ray->dir_x = player->dir_x + player->plane_x * camera_x;
 	ray->dir_y = player->dir_y + player->plane_y * camera_x;
-	printf("Ray Direction for screen x=%d: (%f, %f)\n", x, ray->dir_x, ray->dir_y);
 }
 
 void	execute_dda(t_ray *ray, t_map *conf)
@@ -31,12 +28,12 @@ void	execute_dda(t_ray *ray, t_map *conf)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (conf->map[ray->map_x][ray->map_y] > 0)
+		if (conf->map[ray->map_x][ray->map_y] == 1)
 			hit = 1;
 	}
 }
 
-void	perform_dda(t_camera *player, t_ray *ray, t_map *conf, t_vars vars)
+void	perform_dda(t_camera *player, t_ray *ray, t_map *conf)
 {
 	ray->map_x = (int)player->pos_x;
 	ray->map_y = (int)player->pos_y;
@@ -61,5 +58,4 @@ void	perform_dda(t_camera *player, t_ray *ray, t_map *conf, t_vars vars)
 		ray->side_dist_y = (ray->map_y + 1.0 - player->pos_y) * ray->delta_dist_y;
 	}
 	execute_dda(ray, conf);
-	draw_wall(vars, ray, player);
 }
