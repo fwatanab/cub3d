@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:14:57 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/15 17:12:37 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/15 18:21:37 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_ray
 	double	delta_dist_y;
 	int		step_x;
 	int		step_y;
+	int		side;
 }	t_ray;
 
 char	**input_file(char *file);
@@ -89,8 +90,8 @@ bool	str_all_one(char *str);
 size_t	array_len(char **str);
 char	**input_map(char **str);
 void	calculate_ray_direction(t_ray *ray, t_camera *player);
-void	perform_dda(t_camera *player, t_ray *ray, t_map *conf);
-void	draw_wall(t_vars vars, double wall_dist);
+void	perform_dda(t_camera *player, t_ray *ray, t_map *conf, t_vars vars);
+void	draw_wall(t_vars vars, t_ray *ray, t_camera *player);
 
 //init
 t_vars		*vars_init();
