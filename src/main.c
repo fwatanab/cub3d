@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:06:09 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/12 17:31:34 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/15 18:22:11 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,11 @@ int	main(int argc, char **argv)
 	conf = parser(argv);
 	player = init_player(conf);
 	ray = init_ray();
-	calculate_ray_direction(ray, player);
-	perform_dda(player, ray, conf);
 	vars.mlx = mlx_init();
 	vars.mlx_win = mlx_new_window(vars.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	tex = load_texture(vars, conf);
-	double	wall_dist = 20; //テスト用
-	draw_wall(vars, wall_dist);
+	calculate_ray_direction(ray, player);
+	perform_dda(player, ray, conf, vars);
 	mlx_loop(vars.mlx);
 	map_free(conf);
 	free(player);
