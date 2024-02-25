@@ -20,11 +20,14 @@ all:$(NAME)
 
 $(NAME):$(OBJS)
 	$(MAKE) -C $(LIBFTDIR)
-	$(MAKE) -C $(MLXDIR)
-	$(CC) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(OBJS) -L$(LIBFTDIR) -lft -L$(MLXDIR) -lmlx $(MLXFRAGS)
+	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFTDIR) -lft $(LFLAGS) -o $@
+#	$(MAKE) -C $(MLXDIR)
+#	$(CC) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(OBJS) -L$(LIBFTDIR) -lft -L$(MLXDIR) -lmlx $(MLXFRAGS)
 
 .c.o:
-	$(CC) $(CFLAGS) -Imlx -c $< -o $(<:.c=.o)
+#	 $(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+	$(CC) $(CFLAGS) -I /usr/X11/include -I mlx -c $< -o $(<:.c=.o)
+#	$(CC) $(CFLAGS) -Imlx -c $< -o $(<:.c=.o)
 
 $(MLXDIR)$(MLXNAME):
 	$(MAKE) -C $(MLXDIR)
@@ -35,11 +38,11 @@ $(LIBFTDIR)$(LIBFTNAME):
 clean:
 	$(RM) $(OBJS)
 	$(MAKE) -C $(LIBFTDIR) clean
-	$(MAKE) -C $(MLXDIR) clean
+#	$(MAKE) -C $(MLXDIR) clean
 
 fclean: clean
 	$(RM) $(NAME)
 	$(MAKE) -C $(LIBFTDIR) fclean
-	$(MAKE) -C $(MLXDIR) fclean
+#	$(MAKE) -C $(MLXDIR) fclean
 
 re: fclean all
