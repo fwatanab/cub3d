@@ -10,7 +10,8 @@ CC		= cc
 CFLAGS	= -Wall -Wextra -Werror
 RM		= rm -f
 MLXFRAGS = -lX11 -lXext -lm
-INC		= -I inc/ -I $(LIBFTDIR)
+#↑これ使うのやめたらコンパイルうまくいった！
+INC		= -I inc/ -I $(LIBFTDIR)inc/
 LIBFTDIR	= libft/
 LIBFTNAME	= libft.a
 MLXDIR		= minilibx/
@@ -20,8 +21,9 @@ all:$(NAME)
 
 $(NAME):$(OBJS)
 	$(MAKE) -C $(LIBFTDIR)
-	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFTDIR) -lft $(LFLAGS) -o $@
+#	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFTDIR) -lft $(LFLAGS) -o $@
 #	$(MAKE) -C $(MLXDIR)
+	$(CC) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(OBJS) -L$(LIBFTDIR) -lft -L$(MLXDIR) -lmlx
 #	$(CC) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(OBJS) -L$(LIBFTDIR) -lft -L$(MLXDIR) -lmlx $(MLXFRAGS)
 
 .c.o:

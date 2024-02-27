@@ -6,17 +6,18 @@
 /*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:14:57 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/27 18:03:00 by stakimot         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:15:08 by stakimot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 #define CUB3D_H
 
-#include "../libft/inc/libft.h"
-#include "../minilibx/mlx.h"
-#include "../minilibx/mlx_int.h"
+#include "libft.h"
+#include "mlx.h"
+// #include "../minilibx/mlx_int.h"
 // # include "mlx.h" // 42 iMac
+// #include <mlx.h>
 #include <fcntl.h>
 #include <stdbool.h>
 #include <stdio.h>
