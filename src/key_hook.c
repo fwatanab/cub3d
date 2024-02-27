@@ -1,14 +1,15 @@
 #include "../inc/cub3d.h"
 
-int player_move(int key, void vars)
+int player_move(int key, t_data data)
 {
-	
+	if (key == 1)
+		return (0);
+	(void)data;
+	return (0);
 }
 
-	void key_hook(t_vars vars, t_map conf)
+void key_hook(t_data *data)
 {
-	t_vars vars;
-
-	mlx_key_hook(vars.win, KeyPress, KeyPressMask, player_move, &vars);
-	mlx_loop(vars.mlx);
+	mlx_hook(data->vars.mlx_win, KeyPress, KeyPressMask, player_move, data);
+	mlx_loop(data->vars.mlx_win);
 }

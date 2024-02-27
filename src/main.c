@@ -6,16 +6,17 @@
 /*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:06:09 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/25 18:13:14 by stakimot         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:02:30 by stakimot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	t_vars	vars;
-	t_map	*conf;
+	t_vars vars;
+	t_map *conf;
+	t_data *data;
 
 	if (argc != 2)
 		error("Error: Invalid number of arguments.");
@@ -23,10 +24,12 @@ int	main(int argc, char **argv)
 	parser_print(conf);
 	map_free(conf);
 	vars.mlx = mlx_init();
-	key_hook(vars, conf);
-//	vars.mlx_win = mlx_new_window(vars.mlx, 1400, 700, "cub3d");
-//	mlx_loop(vars.mlx);
+	data = malloc(sizeof(t_data));
+	data->vars = vars;
+	data->map = *conf;
+	key_hook(data);
+	//	vars.mlx_win = mlx_new_window(vars.mlx, 1400, 700, "cub3d");
+	//	mlx_loop(vars.mlx);
 	system("leaks -q cub3d");
 	return (0);
 }
-
