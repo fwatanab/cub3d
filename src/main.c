@@ -6,11 +6,11 @@
 /*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:06:09 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/27 18:02:30 by stakimot         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:21:05 by stakimot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "cub3d.h"
 
 int main(int argc, char **argv)
 {

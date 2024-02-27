@@ -1,4 +1,4 @@
-#include "../inc/cub3d.h"
+#include "cub3d.h"
 
 int player_move(int key, t_data data)
 {

@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 09:56:25 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/07 17:54:12 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:33:47 by stakimot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../inc/cub3d.h"
+
+#include "cub3d.h"
 
 size_t	count_semicolon(char *str)
 {

@@ -10,7 +10,7 @@ CC		= cc
 CFLAGS	= -Wall -Wextra -Werror
 RM		= rm -f
 MLXFRAGS = -lX11 -lXext -lm
-
+INC		= -I inc/ -I $(LIBFTDIR)
 LIBFTDIR	= libft/
 LIBFTNAME	= libft.a
 MLXDIR		= minilibx/
@@ -26,7 +26,7 @@ $(NAME):$(OBJS)
 
 .c.o:
 #	 $(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
-	$(CC) $(CFLAGS) -I /usr/X11/include -I mlx -c $< -o $(<:.c=.o)
+	$(CC) $(CFLAGS) $(INC) -I /usr/X11/include -I mlx -c $< -o $(<:.c=.o)
 #	$(CC) $(CFLAGS) -Imlx -c $< -o $(<:.c=.o)
 
 $(MLXDIR)$(MLXNAME):
