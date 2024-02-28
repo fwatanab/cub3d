@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:06:09 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/15 20:06:21 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/28 18:52:30 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	render_frame(void *param)
 		// 壁までの距離を計算
 		wall_dist = get_wall_dist(&ray, vars->player);
 		// 壁を描画
-		draw_wall(*vars, x, wall_dist);
+		draw_wall(*vars, &ray, x, wall_dist);
 		x++;
 	}
 	return (0);
@@ -46,6 +46,7 @@ int	main(int argc, char **argv)
 	vars.conf = parser(argv);
 	vars.player = init_player(vars.conf);
 	vars.mlx = mlx_init();
+	vars.tex = load_textur(vars, vars.conf);
 	vars.mlx_win = mlx_new_window(vars.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	mlx_loop_hook(vars.mlx, render_frame, &vars);
 	mlx_loop(vars.mlx);
