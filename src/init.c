@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:21:55 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/15 21:27:01 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/28 18:50:39 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,6 @@ t_vars	*vars_init()
 		error("Error: Malloc failure.");
 	return (vars);
 }
-
-//int	search_player(char **map, int flag)
-//{
-//	int	x;
-//	int	y;
-//
-//	y = 0;
-//	while (map[y])
-//	{
-//		x = 0;
-//		while (map[y][x])
-//		{
-//			if (map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'W' || map[y][x] == 'E')
-//			{
-//				if (flag)
-//					return (x);
-//				return (y);
-//			}
-//			x++;
-//		}
-//		y++;
-//	}
-//	return (0);
-//}
 
 int	search_player(char **map, char *direction)
 {
@@ -90,46 +66,53 @@ t_camera	*init_player(t_map *conf)
 			player->dir_y = -1;
 			player->plane_x = 0.66;
 			player->plane_y = 0;
+			player->dir_angle = 0;
 			break;
 		case 'S':
 			player->dir_x = 0;
 			player->dir_y = 1;
 			player->plane_x = -0.66;
 			player->plane_y = 0;
+			player->dir_angle = 180;
 			break;
 		case 'W':
 			player->dir_x = -1;
 			player->dir_y = 0;
 			player->plane_x = 0;
 			player->plane_y = -0.66;
+			player->dir_angle = 270;
 			break;
 		case 'E':
 			player->dir_x = 1;
 			player->dir_y = 0;
 			player->plane_x = 0;
 			player->plane_y = 0.66;
+			player->dir_angle = 90;
 			break;
 	}
 	return (player);
 }
 
-t_ray	*init_ray(void)
+static t_tex_img	load_img(t_vars vars, char *file)
 {
-	t_ray	*ray;
+	t_tex_img	tex;
+	int			x;
+	int			y;
 
-	ray = malloc(sizeof(t_ray));
-	if (!ray)
-		error("Error: Malloc failure.");
-	return (ray);
+	tex.img = mlx_xpm_file_to_image(vars.mlx, file, &x, &y);
+	if (!tex.img)
+		error("Error: Failed to load wall texture.");
+	tex.addr = mlx_get_data_addr(tex.img, &tex.pixel, &tex.len, &tex.end);
+	return (tex);
 }
 
-t_texture	load_texture(t_vars vars, t_map *conf)
+t_textur	load_textur(t_vars vars, t_map *conf)
 {
-	t_texture	tex;
+	t_textur	tex;
 
-	tex.no.img_ptr = mlx_xpm_file_to_image(vars.mlx, conf->no, (int *)60, (int *)60);
-	tex.so.img_ptr = mlx_xpm_file_to_image(vars.mlx, conf->so, (int *)60, (int *)60);
-	tex.we.img_ptr = mlx_xpm_file_to_image(vars.mlx, conf->we, (int *)60, (int *)60);
-	tex.ea.img_ptr = mlx_xpm_file_to_image(vars.mlx, conf->ea, (int *)60, (int *)60);
+	tex.no = load_img(vars, conf->no);
+	tex.so = load_img(vars, conf->so);
+	tex.we = load_img(vars, conf->we);
+	tex.ea = load_img(vars, conf->ea);
 	return (tex);
 }
