@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:48:47 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/15 20:47:18 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/28 18:40:29 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,11 @@ double	get_wall_dist(t_ray *ray, t_camera *player)
 		wall_dist = (ray->map_x - player->pos_x + (1 - ray->step_x) / 2) / ray->dir_x;
 	else
 		wall_dist = (ray->map_y - player->pos_y + (1 - ray->step_y) / 2) / ray->dir_y;
+	printf("wall_dist %f\n", wall_dist);
 	return (wall_dist);
 }
 
-void	draw_wall(t_vars vars, int x, double wall_dist)
+void	draw_wall(t_vars vars, t_ray *ray, int x, double wall_dist)
 {
 	int		wall_height;
 	int		draw_start;
@@ -56,7 +57,6 @@ void	draw_wall(t_vars vars, int x, double wall_dist)
 
 	if (wall_dist <= 0.0)
 		wall_dist = 0.1;
-	printf("wall_dist %f\n", wall_dist);
 	wall_height = (int)(WIN_HEIGHT / wall_dist);
 	draw_start = -wall_height / 2 + WIN_HEIGHT / 2;
 	if (draw_start < 0)
@@ -64,9 +64,26 @@ void	draw_wall(t_vars vars, int x, double wall_dist)
 	draw_end = wall_height / 2 + WIN_HEIGHT / 2;
 	if (draw_end >= WIN_HEIGHT)
 		draw_end = WIN_HEIGHT - 1;
-	while (draw_start <= draw_end)
+	int	y;
+
+	y = draw_start;
+	while (y < draw_end)
 	{
-		mlx_pixel_put(vars.mlx, vars.mlx_win, x, draw_start, 0x00FFFFFF);
-		draw_start++;
+		int d = (y - draw_start) * 256;
+		int	tex_y = ((d * TEX_HEIGHT) / WIN_HEIGHT) / 256;
+		double	wall_x;
+		if (ray->side == 0)
+			wall_x = vars.player->pos_y + wall_dist * ray->dir_y;
+		else
+			wall_x = vars.player->pos_x + wall_dist * ray->dir_x;
+		wall_x -= floor(wall_x);
+		int	tex_x = (int)(wall_x * (double)TEX_WIDTH);
+		if (ray->side == 0 && ray->dir_x > 0)
+			tex_x = TEX_WIDTH - tex_x - 1;
+		if (ray->side == 1 && ray->dir_y < 0)
+			tex_x = TEX_WIDTH - tex_x - 1;
+		int	color = ((int *)vars.tex.no.addr)[tex_y * TEX_WIDTH + tex_x];
+		mlx_pixel_put(vars.mlx, vars.mlx_win, x, y, color);
+		y++;
 	}
 }
