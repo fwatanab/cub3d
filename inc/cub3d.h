@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:14:57 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/15 20:32:58 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/02/28 18:37:26 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@
 
 #define WIN_WIDTH 1200
 #define WIN_HEIGHT 800
-#define BLOCK_SIZE 1.0
+#define TEX_WIDTH 60
+#define TEX_HEIGHT 60
 
 typedef struct s_rgb
 {
@@ -48,11 +49,29 @@ typedef struct s_camera
 {
 	double	dir_x;
 	double	dir_y;
+	double	dir_angle;
 	double	plane_x;
 	double	plane_y;
 	double	pos_x;
 	double	pos_y;
 }	t_camera;
+
+typedef struct s_tex_img
+{
+	void	*img;
+	char	*addr;
+	int		pixel;
+	int		len;
+	int		end;
+}	t_tex_img;
+
+typedef struct s_textur
+{
+	t_tex_img	no;
+	t_tex_img	so;
+	t_tex_img	we;
+	t_tex_img	ea;
+}	t_textur;
 
 typedef struct s_vars
 {
@@ -60,29 +79,14 @@ typedef struct s_vars
 	void			*mlx_win;
 	t_map			*conf;
 	t_camera		*player;
+	t_textur		tex;
 }	t_vars;
-
-typedef struct s_tex_img
-{
-	void	*img_ptr;  // 画像ポインタ
-	char	*addr;     // 画像のピクセルデータへのポインタ
-	int		bpp;       // 画像のビット深度（ビット/ピクセル）
-	int		line_length; // 画像の一行の長さ（バイト）
-	int		endian;    // エンディアン
-}	t_tex_img;
-
-typedef struct s_texture
-{
-	t_tex_img	no;
-	t_tex_img	so;
-	t_tex_img	we;
-	t_tex_img	ea;
-}	t_texture;
 
 typedef struct s_ray
 {
 	double	dir_x;
 	double	dir_y;
+	double	ray_angle;
 	int		map_x;
 	int		map_y;
 	double	side_dist_x;
@@ -104,14 +108,14 @@ char	**input_map(char **str);
 void	calculate_ray_direction(t_ray *ray, t_camera *player, int x);
 void	perform_dda(t_camera *player, t_ray *ray, t_map *conf);
 double	get_wall_dist(t_ray *ray, t_camera *player);
-void	draw_wall(t_vars vars, int x, double wall_dist);
+void	draw_wall(t_vars vars, t_ray *ray, int x, double wall_dist);
 int		get_texture_color(t_img *tex, int x, int y);
 
 //init
 t_vars		*vars_init();
 t_camera	*init_player(t_map *conf);
 t_ray		*init_ray(void);
-t_texture	load_texture(t_vars vars, t_map *conf);
+t_textur	load_textur(t_vars vars, t_map *conf);
 
 //error_free
 void	error(char *str);
