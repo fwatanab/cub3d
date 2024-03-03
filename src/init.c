@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:21:55 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/28 18:50:39 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/03/03 22:51:23 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	search_player(char **map, char *direction)
 			if (map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'W' || map[y][x] == 'E')
 			{
 				*direction = map[y][x];
-				return (y * 10 + x);
+				return (y * 100 + x);
 			}
 			x++;
 		}
@@ -57,8 +57,8 @@ t_camera	*init_player(t_map *conf)
 	position = search_player(conf->map, &direction);
 	if (position == -1)
 		error("Player not found.");
-	player->pos_x = position % 10;
-	player->pos_y = position / 10;
+	player->pos_x = position % 100;
+	player->pos_y = position / 100;
 	switch (direction)
 	{
 		case 'N':
