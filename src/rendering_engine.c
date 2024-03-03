@@ -33,7 +33,7 @@ void	execute_dda(t_ray *ray, t_map *conf)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (conf->map[ray->map_x][ray->map_y] == '1')
+		if (conf->map[ray->map_y][ray->map_x] == '1')
 			hit = 1;
 	}
 }
