@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:48:47 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/07 18:14:10 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:56:30 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ double	get_wall_dist(t_ray *ray, t_camera *player)
 		wall_dist = (ray->map_x - player->pos_x + (1 - ray->step_x) / 2) / ray->dir_x;
 	else
 		wall_dist = (ray->map_y - player->pos_y + (1 - ray->step_y) / 2) / ray->dir_y;
-	printf("wall_dist %f\n", wall_dist);
 	return (wall_dist);
 }
 
@@ -84,5 +83,4 @@ void	draw_floor_and_ceiling(t_vars *vars, t_tex_img *buf)
 		}
 		y++;
 	}
-	mlx_put_image_to_window(vars->mlx, vars->mlx_win, buf->img, 0, 0);
 }
