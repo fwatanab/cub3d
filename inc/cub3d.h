@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:14:57 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/28 18:37:26 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:17:08 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,20 @@
 # include <stdbool.h>
 # include <stdio.h>
 
-#define WIN_WIDTH 1200
-#define WIN_HEIGHT 800
-#define TEX_WIDTH 60
-#define TEX_HEIGHT 60
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 720
+# define TEX_WIDTH 60
+# define TEX_HEIGHT 60
+
+# define MOVESPEED 0.05
+# define ROTSPEED 0.05
+
+//hook
+# define ESC 65307
+# define UP 65362
+# define DOWN 65364
+# define LEFT 65361
+# define RIGHT 65363
 
 typedef struct s_rgb
 {
@@ -108,14 +118,17 @@ char	**input_map(char **str);
 void	calculate_ray_direction(t_ray *ray, t_camera *player, int x);
 void	perform_dda(t_camera *player, t_ray *ray, t_map *conf);
 double	get_wall_dist(t_ray *ray, t_camera *player);
-void	draw_wall(t_vars vars, t_ray *ray, int x, double wall_dist);
+void	draw_wall(t_vars *vars, t_ray *ray, int x, double wall_dist, char *buf);
 int		get_texture_color(t_img *tex, int x, int y);
+void	hook(t_vars *vars);
+void	draw_floor_and_ceiling(t_vars *vars, t_tex_img *buf);
 
 //init
 t_vars		*vars_init();
 t_camera	*init_player(t_map *conf);
 t_ray		*init_ray(void);
 t_textur	load_textur(t_vars vars, t_map *conf);
+t_tex_img	init_img(t_vars *vars);
 
 //error_free
 void	error(char *str);
