@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rendering_engine.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/07 18:55:37 by fwatanab          #+#    #+#             */
+/*   Updated: 2024/03/07 18:55:58 by fwatanab         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3d.h"
 
 void	calculate_ray_direction(t_ray *ray, t_camera *player, int x)
@@ -65,5 +77,4 @@ void	perform_dda(t_camera *player, t_ray *ray, t_map *conf)
 		ray->side_dist_y = (ray->map_y + 1.0 - player->pos_y) * ray->delta_dist_y;
 	}
 	execute_dda(ray, conf);
-	printf("map_x: %d, map_y: %d, side_dist_x: %f, side_dist_y: %f\n", ray->map_x, ray->map_y, ray->side_dist_x, ray->side_dist_y);
 }
