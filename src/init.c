@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:21:55 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/03 22:51:23 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:16:56 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,15 @@ static t_tex_img	load_img(t_vars vars, char *file)
 		error("Error: Failed to load wall texture.");
 	tex.addr = mlx_get_data_addr(tex.img, &tex.pixel, &tex.len, &tex.end);
 	return (tex);
+}
+
+t_tex_img	init_img(t_vars *vars)
+{
+	t_tex_img	img;
+
+	img.img = mlx_new_image(vars->mlx, WIN_WIDTH, WIN_HEIGHT);
+	img.addr = mlx_get_data_addr(img.img, &img.pixel, &img.len, &img.end);
+	return (img);
 }
 
 t_textur	load_textur(t_vars vars, t_map *conf)
