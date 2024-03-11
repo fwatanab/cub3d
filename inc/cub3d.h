@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:14:57 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/07 18:17:08 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:48:06 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,11 @@
 # define TEX_WIDTH 60
 # define TEX_HEIGHT 60
 
-# define MOVESPEED 0.05
-# define ROTSPEED 0.05
+# define MOVESPEED 0.1
+# define ROTSPEED 0.1
 
 //hook
 # define ESC 65307
-# define UP 65362
-# define DOWN 65364
 # define LEFT 65361
 # define RIGHT 65363
 
@@ -46,20 +44,19 @@ typedef struct s_rgb
 
 typedef struct t_map
 {
-	char			*no;
-	char			*so;
-	char			*we;
-	char			*ea;
-	t_rgb			*f;
-	t_rgb			*c;
-	char			**map;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	t_rgb	*f;
+	t_rgb	*c;
+	char	**map;
 }	t_map;
 
 typedef struct s_camera
 {
 	double	dir_x;
 	double	dir_y;
-	double	dir_angle;
 	double	plane_x;
 	double	plane_y;
 	double	pos_x;
@@ -85,11 +82,12 @@ typedef struct s_textur
 
 typedef struct s_vars
 {
-	void			*mlx;
-	void			*mlx_win;
-	t_map			*conf;
-	t_camera		*player;
-	t_textur		tex;
+	void		*mlx;
+	void		*mlx_win;
+	t_map		*conf;
+	t_camera	*player;
+	t_textur	tex;
+	char		*buf;
 }	t_vars;
 
 typedef struct s_ray
@@ -108,37 +106,48 @@ typedef struct s_ray
 	int		side;
 }	t_ray;
 
-char	**input_file(char *file);
-t_map	*parser(char **argv);
-void	change_rgb(t_rgb *rgb, char *str);
-size_t	count_semicolon(char *str);
-bool	str_all_one(char *str);
-size_t	array_len(char **str);
-char	**input_map(char **str);
-void	calculate_ray_direction(t_ray *ray, t_camera *player, int x);
-void	perform_dda(t_camera *player, t_ray *ray, t_map *conf);
-double	get_wall_dist(t_ray *ray, t_camera *player);
-void	draw_wall(t_vars *vars, t_ray *ray, int x, double wall_dist, char *buf);
-int		get_texture_color(t_img *tex, int x, int y);
-void	hook(t_vars *vars);
-void	draw_floor_and_ceiling(t_vars *vars, t_tex_img *buf);
+typedef struct s_draw
+{
+	int		wall_height;
+	int		draw_start;
+	int		draw_end;
+	double	wall_x;
+	int		tex_x;
+	int		tex_y;
+	int		color;
+}	t_draw;
+
+char		**input_file(char *file);
+t_map		*parser(char **argv);
+void		change_rgb(t_rgb *rgb, char *str);
+size_t		count_semicolon(char *str);
+bool		str_all_one(char *str);
+size_t		array_len(char **str);
+char		**input_map(char **str);
+t_textur	load_textur(t_vars vars, t_map *conf);
+void		calculate_ray_direction(t_ray *ray, t_camera *player, int x);
+void		perform_dda(t_camera *player, t_ray *ray, t_map *conf);
+double		get_wall_dist(t_ray *ray, t_camera *player);
+void		draw_wall(t_vars *vars, t_ray *ray, int x, char *buf);
+int			get_texture_color(t_img *tex, int x, int y);
+void		draw_floor_and_ceiling(t_vars *vars, t_tex_img *buf);
 
 //init
-t_vars		*vars_init();
+t_vars		*vars_init(void);
 t_camera	*init_player(t_map *conf);
+void		set_direction(t_camera *player, char direction);
 t_ray		*init_ray(void);
-t_textur	load_textur(t_vars vars, t_map *conf);
 t_tex_img	init_img(t_vars *vars);
 
 //error_free
-void	error(char *str);
-void	array_free(char **str);
-void	map_free(t_map *conf);
+void		error(char *str);
+void		array_free(char **str);
+void		map_free(t_map *conf);
 
 //ft_utils
-char	*ft_strndup(const char *s1, size_t n);
-int		ft_strcmp(const char *s1, const char *s2);
+char		*ft_strndup(const char *s1, size_t n);
+int			ft_strcmp(const char *s1, const char *s2);
 
 //print for debug
-void	parser_print(t_map *conf);
+void		parser_print(t_map *conf);
 #endif
