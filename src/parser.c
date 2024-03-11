@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:35:47 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/11 19:23:18 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/03/11 19:46:15 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,13 @@ char	**parse_map(char **file)
 
 	while (*file)
 	{
-		if (str_all_one(*file) == true)
+		if (**file != '\0'
+			&& ft_strncmp(*file, "NO", 2) != 0
+			&& ft_strncmp(*file, "SO", 2) != 0
+			&& ft_strncmp(*file, "WE", 2) != 0
+			&& ft_strncmp(*file, "EA", 2) != 0
+			&& ft_strncmp(*file, "F", 1) != 0
+			&& ft_strncmp(*file, "C", 1) != 0)
 		{
 			map = input_map(file);
 			return (map);
