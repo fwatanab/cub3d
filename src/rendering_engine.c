@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 18:55:37 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/07 18:55:58 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:25:09 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ void	calculate_ray_direction(t_ray *ray, t_camera *player, int x)
 	ray->dir_x = player->dir_x + player->plane_x * camera_x;
 	ray->dir_y = player->dir_y + player->plane_y * camera_x;
 	red_to_deg = 180.0 / M_PI;
-	ray->ray_angle = player->dir_angle + atan2(ray->dir_y, ray->dir_x) * red_to_deg;
-	if (ray->ray_angle < 0)
-		ray->ray_angle += 360;
 }
 
 void	execute_dda(t_ray *ray, t_map *conf)
@@ -50,12 +47,23 @@ void	execute_dda(t_ray *ray, t_map *conf)
 	}
 }
 
-void	perform_dda(t_camera *player, t_ray *ray, t_map *conf)
+void	ray_set(t_camera *player, t_ray *ray)
 {
 	ray->map_x = (int)player->pos_x;
 	ray->map_y = (int)player->pos_y;
-	ray->delta_dist_x = (ray->dir_x == 0) ? 1e30 : fabs(1 / ray->dir_x);
-	ray->delta_dist_y = (ray->dir_y == 0) ? 1e30: fabs(1 / ray->dir_y);
+	if (ray->dir_x == 0)
+		ray->delta_dist_x = 1e30;
+	else
+		ray->delta_dist_x = fabs(1 / ray->dir_x);
+	if (ray->dir_y == 0)
+		ray->delta_dist_y = 1e30;
+	else
+		ray->delta_dist_y = fabs(1 / ray->dir_y);
+}
+
+void	perform_dda(t_camera *player, t_ray *ray, t_map *conf)
+{
+	ray_set(player, ray);
 	if (ray->dir_x < 0)
 	{
 		ray->step_x = -1;
@@ -63,8 +71,9 @@ void	perform_dda(t_camera *player, t_ray *ray, t_map *conf)
 	}
 	else
 	{
-		ray->step_x= 1;
-		ray->side_dist_x = (ray->map_x + 1.0 - player->pos_x) * ray->delta_dist_x;
+		ray->step_x = 1;
+		ray->side_dist_x = (ray->map_x + 1.0 - player->pos_x) \
+						* ray->delta_dist_x;
 	}
 	if (ray->dir_y < 0)
 	{
@@ -74,7 +83,8 @@ void	perform_dda(t_camera *player, t_ray *ray, t_map *conf)
 	else
 	{
 		ray->step_y = 1;
-		ray->side_dist_y = (ray->map_y + 1.0 - player->pos_y) * ray->delta_dist_y;
+		ray->side_dist_y = (ray->map_y + 1.0 - player->pos_y) \
+						* ray->delta_dist_y;
 	}
 	execute_dda(ray, conf);
 }
