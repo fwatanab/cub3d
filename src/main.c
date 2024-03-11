@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:06:09 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/07 18:16:46 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:58:42 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	render_frame(void *param)
 {
 	t_vars		*vars;
 	t_ray		ray;
-	double		wall_dist;
 	int			x;
 	t_tex_img	img;
 
@@ -28,8 +27,7 @@ int	render_frame(void *param)
 	{
 		calculate_ray_direction(&ray, vars->player, x);
 		perform_dda(vars->player, &ray, vars->conf);
-		wall_dist = get_wall_dist(&ray, vars->player);
-		draw_wall(vars, &ray, x, wall_dist, img.addr);
+		draw_wall(vars, &ray, x, img.addr);
 		x++;
 	}
 	mlx_put_image_to_window(vars->mlx, vars->mlx_win, img.img, 0, 0);
@@ -48,8 +46,6 @@ int	main(int argc, char **argv)
 	vars.tex = load_textur(vars, vars.conf);
 	vars.mlx_win = mlx_new_window(vars.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	mlx_loop_hook(vars.mlx, render_frame, &vars);
-	hook(&vars);
 	mlx_loop(vars.mlx);
 	return (0);
 }
-
