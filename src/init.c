@@ -6,13 +6,13 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:21:55 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/07 18:16:56 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:59:09 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-t_vars	*vars_init()
+t_vars	*vars_init(void)
 {
 	t_vars	*vars;
 
@@ -33,7 +33,8 @@ int	search_player(char **map, char *direction)
 		x = 0;
 		while (map[y][x])
 		{
-			if (map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'W' || map[y][x] == 'E')
+			if (map[y][x] == 'N' || map[y][x] == 'S'
+					|| map[y][x] == 'W' || map[y][x] == 'E')
 			{
 				*direction = map[y][x];
 				return (y * 100 + x);
@@ -42,7 +43,7 @@ int	search_player(char **map, char *direction)
 		}
 		y++;
 	}
-return (-1);
+	return (-1);
 }
 
 t_camera	*init_player(t_map *conf)
@@ -59,69 +60,6 @@ t_camera	*init_player(t_map *conf)
 		error("Player not found.");
 	player->pos_x = position % 100;
 	player->pos_y = position / 100;
-	switch (direction)
-	{
-		case 'N':
-			player->dir_x = 0;
-			player->dir_y = -1;
-			player->plane_x = 0.66;
-			player->plane_y = 0;
-			player->dir_angle = 0;
-			break;
-		case 'S':
-			player->dir_x = 0;
-			player->dir_y = 1;
-			player->plane_x = -0.66;
-			player->plane_y = 0;
-			player->dir_angle = 180;
-			break;
-		case 'W':
-			player->dir_x = -1;
-			player->dir_y = 0;
-			player->plane_x = 0;
-			player->plane_y = -0.66;
-			player->dir_angle = 270;
-			break;
-		case 'E':
-			player->dir_x = 1;
-			player->dir_y = 0;
-			player->plane_x = 0;
-			player->plane_y = 0.66;
-			player->dir_angle = 90;
-			break;
-	}
+	set_direction(player, direction);
 	return (player);
-}
-
-static t_tex_img	load_img(t_vars vars, char *file)
-{
-	t_tex_img	tex;
-	int			x;
-	int			y;
-
-	tex.img = mlx_xpm_file_to_image(vars.mlx, file, &x, &y);
-	if (!tex.img)
-		error("Error: Failed to load wall texture.");
-	tex.addr = mlx_get_data_addr(tex.img, &tex.pixel, &tex.len, &tex.end);
-	return (tex);
-}
-
-t_tex_img	init_img(t_vars *vars)
-{
-	t_tex_img	img;
-
-	img.img = mlx_new_image(vars->mlx, WIN_WIDTH, WIN_HEIGHT);
-	img.addr = mlx_get_data_addr(img.img, &img.pixel, &img.len, &img.end);
-	return (img);
-}
-
-t_textur	load_textur(t_vars vars, t_map *conf)
-{
-	t_textur	tex;
-
-	tex.no = load_img(vars, conf->no);
-	tex.so = load_img(vars, conf->so);
-	tex.we = load_img(vars, conf->we);
-	tex.ea = load_img(vars, conf->ea);
-	return (tex);
 }
