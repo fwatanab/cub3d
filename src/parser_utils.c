@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 09:56:25 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/07 17:54:12 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/03/11 19:23:57 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/cub3d.h"
@@ -95,5 +95,4 @@ char	**input_map(char **str)
 	}
 	map[i] = NULL;
 	return (map);
-
 }
