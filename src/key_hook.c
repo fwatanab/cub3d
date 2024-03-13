@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 17:03:55 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/11 16:31:08 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:09:08 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void movement_player(t_vars *vars, char direction)
 			vars->player->pos_y += vars->player->dir_x * MOVESPEED;
 		}
 	}
-	printf("pos_x %f\tpos_y%f\n", vars->player->pos_x, vars->player->pos_y);
 }
 
 void rotate_player(t_vars *vars, char direction)
