@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:14:57 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/11 18:48:17 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:17:48 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../libft/inc/libft.h"
 # include "../minilibx/mlx.h"
-# include "../minilibx/mlx_int.h"
+// # include "../minilibx/mlx_int.h"
 //# include "mlx.h" // 42 iMac
 # include <math.h>
 # include <fcntl.h>
@@ -139,6 +139,9 @@ t_camera	*init_player(t_map *conf);
 void		set_direction(t_camera *player, char direction);
 t_ray		*init_ray(void);
 t_tex_img	init_img(t_vars *vars);
+
+//map_error_check
+bool		map_error_check(t_map *conf);
 
 //error_free
 void		error(char *str);

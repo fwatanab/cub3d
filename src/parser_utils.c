@@ -6,9 +6,10 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 09:56:25 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/11 19:23:57 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:20:08 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../inc/cub3d.h"
 
 size_t	count_semicolon(char *str)
@@ -39,28 +40,6 @@ void	change_rgb(t_rgb *rgb, char *str)
 	if (result)
 		rgb->b = ft_atoi(result[i]);
 	array_free(result);
-}
-
-bool	str_all_one(char *str)
-{
-	size_t	count;
-
-	count = 0;
-	if (!str)
-		return (false);
-	while (*str)
-	{
-		if (!(*str == '1' || *str == ' '))
-		{
-			return (false);
-		}
-		else if (*str == '1')
-			count++;
-		str++;
-	}
-	if (!count)
-		return (false);
-	return (true);
 }
 
 size_t	array_size(char **str)

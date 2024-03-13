@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:06:09 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/11 19:36:46 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:17:07 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		error("Error: Invalid number of arguments.");
 	vars.conf = parser(argv);
+	if (map_error_check(vars.conf) == false)
+		error("map_error");
 	vars.player = init_player(vars.conf);
 	vars.mlx = mlx_init();
 	vars.tex = load_textur(vars, vars.conf);
