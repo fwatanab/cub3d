@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:14:57 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/11 18:48:06 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:48:17 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ void		perform_dda(t_camera *player, t_ray *ray, t_map *conf);
 double		get_wall_dist(t_ray *ray, t_camera *player);
 void		draw_wall(t_vars *vars, t_ray *ray, int x, char *buf);
 int			get_texture_color(t_img *tex, int x, int y);
+void		hook(t_vars *vars);
 void		draw_floor_and_ceiling(t_vars *vars, t_tex_img *buf);
 
 //init
