@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:06:24 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/02/08 16:35:01 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/03/11 19:35:08 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,11 @@ size_t	map_size(char *file)
 	return (len);
 }
 
-char	**input_file(char *file)
+static char	**read_lines_into_array(int fd, char **str)
 {
-	int		fd;
 	char	*line;
-	char	**str;
-	size_t	i;
+	int		i;
 
-	str = malloc(sizeof(char *) * (map_size(file) + 1));
-	if (!str)
-		error("Error: Malloc failure.");
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-	{
-		free(str);
-		error("Error: Failed to open the file.");
-	}
 	i = 0;
 	while (1)
 	{
@@ -76,6 +65,24 @@ char	**input_file(char *file)
 		i++;
 	}
 	str[i] = NULL;
+	return (str);
+}
+
+char	**input_file(char *file)
+{
+	int		fd;
+	char	**str;
+
+	str = malloc(sizeof(char *) * (map_size(file) + 1));
+	if (!str)
+		error("Error: Malloc failure.");
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+	{
+		free(str);
+		error("Error: Failed to open the file.");
+	}
+	str = read_lines_into_array(fd, str);
 	close(fd);
 	return (str);
 }
