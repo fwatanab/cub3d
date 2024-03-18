@@ -6,7 +6,7 @@
 /*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:06:09 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/11 19:45:19 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:17:07 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	main(int argc, char **argv)
 	vars.tex = load_textur(vars, vars.conf);
 	vars.mlx_win = mlx_new_window(vars.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	mlx_loop_hook(vars.mlx, render_frame, &vars);
+	hook(&vars);
 	mlx_loop(vars.mlx);
 	return (0);
 }
