@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:48:47 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/18 18:44:28 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:29:01 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,16 @@ char	*check_wall_direction(t_ray *ray, t_textur tex)
 	if (ray->side == 0)
 	{
 		if (ray->dir_x > 0)
-			return (tex.ea.addr);
-		else
 			return (tex.we.addr);
+		else
+			return (tex.ea.addr);
 	}
 	else
 	{
 		if (ray->dir_y > 0)
-			return (tex.so.addr);
-		else
 			return (tex.no.addr);
+		else
+			return (tex.so.addr);
 	}
 	return (NULL);
 }
