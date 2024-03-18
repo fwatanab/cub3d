@@ -6,7 +6,7 @@
 /*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:14:57 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/11 19:44:04 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:13:20 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,13 @@ void		calculate_ray_direction(t_ray *ray, t_camera *player, int x);
 void		perform_dda(t_camera *player, t_ray *ray, t_map *conf);
 double		get_wall_dist(t_ray *ray, t_camera *player);
 void		draw_wall(t_vars *vars, t_ray *ray, int x, char *buf);
-int			get_texture_color(t_img *tex, int x, int y);
 void		draw_floor_and_ceiling(t_vars *vars, t_tex_img *buf);
+
+//key_hook
+void		hook(t_vars *vars);
+void		move_forward_backward(t_camera *player, t_map *conf, char direction);
+void		strafe_left_right(t_camera *player, t_map *conf, char direction);
+void		rotate_player(t_camera *player, char direction);
 
 //init
 t_vars		*vars_init(void);
