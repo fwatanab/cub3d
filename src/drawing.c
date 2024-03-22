@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:48:47 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/18 19:29:01 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:53:42 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	draw_wall(t_vars *vars, t_ray *ray, int x, char *buf)
 		params.tex_y = ((d * TEX_HEIGHT) / WIN_HEIGHT) / 256;
 		params.tex_x = (int)(params.wall_x * (double)TEX_WIDTH);
 		if ((ray->side == 0 && ray->dir_x > 0)
-			|| (ray->side == 1 && ray->dir_y > 0))
+			|| (ray->side == 1 && ray->dir_y < 0))
 			params.tex_x = TEX_WIDTH - params.tex_x - 1;
 		addr = check_wall_direction(ray, vars->tex);
 		params.color = ((int *)addr)[params.tex_y * TEX_WIDTH + params.tex_x];
