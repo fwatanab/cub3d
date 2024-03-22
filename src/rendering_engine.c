@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 18:55:37 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/11 17:25:09 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:27:03 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 void	calculate_ray_direction(t_ray *ray, t_camera *player, int x)
 {
 	double	camera_x;
-	double	red_to_deg;
 
 	camera_x = 2 * x / (double)WIN_WIDTH -1;
 	ray->dir_x = player->dir_x + player->plane_x * camera_x;
 	ray->dir_y = player->dir_y + player->plane_y * camera_x;
-	red_to_deg = 180.0 / M_PI;
 }
 
 void	execute_dda(t_ray *ray, t_map *conf)
