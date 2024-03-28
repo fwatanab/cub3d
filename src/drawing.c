@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:48:47 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/11 18:51:21 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:53:42 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,32 @@ void	calculate_wall_parameters(t_vars *vars, t_ray *ray, t_draw *params, \
 	params->wall_x -= floor(params->wall_x);
 }
 
+char	*check_wall_direction(t_ray *ray, t_textur tex)
+{
+	if (ray->side == 0)
+	{
+		if (ray->dir_x > 0)
+			return (tex.we.addr);
+		else
+			return (tex.ea.addr);
+	}
+	else
+	{
+		if (ray->dir_y > 0)
+			return (tex.no.addr);
+		else
+			return (tex.so.addr);
+	}
+	return (NULL);
+}
+
 void	draw_wall(t_vars *vars, t_ray *ray, int x, char *buf)
 {
 	t_draw	params;
 	double	wall_dist;
 	int		d;
 	int		y;
+	char	*addr;
 
 	wall_dist = get_wall_dist(ray, vars->player);
 	calculate_wall_parameters(vars, ray, &params, wall_dist);
@@ -60,10 +80,10 @@ void	draw_wall(t_vars *vars, t_ray *ray, int x, char *buf)
 		params.tex_y = ((d * TEX_HEIGHT) / WIN_HEIGHT) / 256;
 		params.tex_x = (int)(params.wall_x * (double)TEX_WIDTH);
 		if ((ray->side == 0 && ray->dir_x > 0)
-			|| (ray->side == 1 && ray->dir_y > 0))
+			|| (ray->side == 1 && ray->dir_y < 0))
 			params.tex_x = TEX_WIDTH - params.tex_x - 1;
-		params.color = \
-			((int *)vars->tex.no.addr)[params.tex_y * TEX_WIDTH + params.tex_x];
+		addr = check_wall_direction(ray, vars->tex);
+		params.color = ((int *)addr)[params.tex_y * TEX_WIDTH + params.tex_x];
 		*(int *)(buf + (x + y * WIN_WIDTH) * 4) = params.color;
 		y++;
 	}
