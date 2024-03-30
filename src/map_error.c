@@ -6,7 +6,7 @@
 /*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 03:09:20 by stakimot          #+#    #+#             */
-/*   Updated: 2024/02/12 04:59:44 by stakimot         ###   ########.fr       */
+/*   Updated: 2024/03/30 16:22:12 by stakimot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,11 @@ bool	wall_check(char *str, int *left, int *right)
 		if (str[cnt] == '1')
 		{
 			if (l_flg == 0)
-			{
-				l = cnt;
-				l_flg = 1;
-			}
+				flg_check(&l, &l_flg, cnt);
 			r = cnt;
 		}
-		if (cnt <= *left && str[cnt] != '1')
-			return (false);
-		if (cnt >= *right && str[cnt] != '1')
+		if ((cnt <= *left && str[cnt] != '1')
+			|| (cnt >= *right && str[cnt] != '1'))
 			return (false);
 		cnt ++;
 	}

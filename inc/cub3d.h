@@ -6,7 +6,7 @@
 /*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:14:57 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/18 16:13:20 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/03/30 16:24:09 by stakimot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,4 +158,7 @@ int			ft_strcmp(const char *s1, const char *s2);
 
 //print for debug
 void		parser_print(t_map *conf);
+
+//map_error_utils
+void	flg_check(int *l, int *l_flg, int cnt);
 #endif
