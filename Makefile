@@ -3,7 +3,7 @@ NAME	= cub3d
 SRCSDIR	= src/
 
 
-SRCS = main.c check_map.c ft_utils.c error.c init.c parser.c print.c free.c map_error.c set_direction.c parser_utils.c load_textur.c rendering_engine.c drawing.c key_hook.c move_player.c
+SRCS = main.c check_map.c ft_utils.c error.c init.c parser.c print.c free.c map_error.c map_error_utils.c set_direction.c parser_utils.c load_textur.c rendering_engine.c drawing.c key_hook.c move_player.c
 
 OBJS	= $(addprefix $(SRCSDIR), $(SRCS:.c=.o))
 
