@@ -6,7 +6,7 @@
 /*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:14:57 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/18 16:13:20 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:39:35 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 # define CUB3D_H
 
 # include "../libft/inc/libft.h"
-# include "../minilibx/mlx.h"
-// # include "../minilibx/mlx_int.h"
-//# include "mlx.h" // 42 iMac
+# include "mlx.h"
 # include <math.h>
 # include <fcntl.h>
 # include <stdbool.h>
@@ -31,9 +29,13 @@
 # define ROTSPEED 0.1
 
 //hook
-# define ESC 65307
-# define LEFT 65361
-# define RIGHT 65363
+# define ESC 53
+# define W 13
+# define A 0
+# define S 1
+# define D 2
+# define LEFT 123
+# define RIGHT 124
 
 typedef struct s_rgb
 {
