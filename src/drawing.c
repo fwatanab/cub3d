@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:48:47 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/22 17:53:42 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/04/16 14:26:13 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ double	get_wall_dist(t_ray *ray, t_camera *player)
 	else
 		wall_dist = (ray->map_y - player->pos_y + (1 - ray->step_y) / 2) \
 					/ ray->dir_y;
+	if (fabs(wall_dist) < 0.0001)
+		wall_dist = 0.0001;
 	return (wall_dist);
 }
 
