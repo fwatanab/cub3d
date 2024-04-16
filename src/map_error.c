@@ -6,7 +6,7 @@
 /*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 03:09:20 by stakimot          #+#    #+#             */
-/*   Updated: 2024/03/30 16:22:12 by stakimot         ###   ########.fr       */
+/*   Updated: 2024/04/16 17:29:28 by stakimot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,48 @@ bool	char_check(char **map)
 	return (true);
 }
 
-bool	top_bottom_check(char *str, int *left, int *right, int flg)
+// bool	top_bottom_check(char *str, int *left, int *right, int flg)
+// {
+// 	int	cnt;
+// 	int	left_flg;
+
+// 	cnt = 0;
+// 	left_flg = 0;
+// 	while (str[cnt])
+// 	{
+// 		if (str[cnt] == '1')
+// 		{
+// 			if (left_flg == 0)
+// 			{
+// 				*left = cnt;
+// 				left_flg = 1;
+// 			}
+// 			*right = cnt;
+// 		}
+// 		if (cnt < *left && str[cnt] != '1' && flg == 1)
+// 			return (false);
+// 		if (cnt > *right && str[cnt] != '1' && flg == 1)
+// 		{
+// 			printf("test!!!\n");
+// 			return (false);
+// 		}
+// 		if (str[cnt] != '1' && str[cnt] != ' ')
+// 			return (false);
+// 		cnt++;
+// 	}
+// 	return (true);
+// }
+
+bool	top_bottom_check(char **map, int *left, int *right, int col)
 {
 	int	cnt;
 	int	left_flg;
 
 	cnt = 0;
 	left_flg = 0;
-	while (str[cnt])
+	while (map[col][cnt])
 	{
-		if (str[cnt] == '1')
+		if (map[col][cnt] == '1')
 		{
 			if (left_flg == 0)
 			{
@@ -70,11 +102,13 @@ bool	top_bottom_check(char *str, int *left, int *right, int flg)
 			}
 			*right = cnt;
 		}
-		if (cnt <= *left && str[cnt] != '1' && flg == 1)
-			return (false);
-		if (cnt >= *right && str[cnt] != '1' && flg == 1)
-			return (false);
-		if (str[cnt] != '1' && str[cnt] != ' ')
+		if (col != 0)
+		{
+			if ((cnt < *left && map[col][cnt] != 1 && map[col - 1][cnt] != 1) ||
+				(cnt < *right && map[col][cnt] != 1 && map[col - 1][cnt] != 1))
+				return (false);
+		}
+		if (map[col][cnt] != '1' && map[col][cnt] != ' ')
 			return (false);
 		cnt++;
 	}
@@ -100,8 +134,8 @@ bool	wall_check(char *str, int *left, int *right)
 				flg_check(&l, &l_flg, cnt);
 			r = cnt;
 		}
-		if ((cnt <= *left && str[cnt] != '1')
-			|| (cnt >= *right && str[cnt] != '1'))
+		if ((cnt < *left && str[cnt] != '1')
+			|| (cnt > *right && str[cnt] != '1'))
 			return (false);
 		cnt ++;
 	}
@@ -119,17 +153,15 @@ bool	map_error_check(t_map *conf)
 	cnt = 0;
 	if (char_check(conf->map) == false)
 		return (false);
-	if (top_bottom_check(conf->map[cnt++], &left, &right, 0) == false)
+	if (top_bottom_check(conf->map, &left, &right, cnt++) == false)
 		return (false);
 	while (conf->map[cnt + 1])
 	{
 		if (wall_check(conf->map[cnt], &left, &right) == false)
-		{
 			return (false);
-		}
 		cnt ++;
 	}
-	if (top_bottom_check(conf->map[cnt], &left, &right, 1) == false)
+	if (top_bottom_check(conf->map, &left, &right, cnt) == false)
 		return (false);
 	return (true);
 }
