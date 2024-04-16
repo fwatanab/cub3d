@@ -6,7 +6,7 @@
 /*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 03:09:20 by stakimot          #+#    #+#             */
-/*   Updated: 2024/04/16 17:29:28 by stakimot         ###   ########.fr       */
+/*   Updated: 2024/04/17 03:37:20 by stakimot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,9 @@ bool	top_bottom_check(char **map, int *left, int *right, int col)
 			}
 			*right = cnt;
 		}
-		if (col != 0)
-		{
-			if ((cnt < *left && map[col][cnt] != 1 && map[col - 1][cnt] != 1) ||
-				(cnt < *right && map[col][cnt] != 1 && map[col - 1][cnt] != 1))
+			if ((col != 0 && cnt < *left && map[col][cnt] != 1 && map[col - 1][cnt] != 1) ||
+				(col != 0 && cnt < *right && map[col][cnt] != 1 && map[col - 1][cnt] != 1))
 				return (false);
-		}
 		if (map[col][cnt] != '1' && map[col][cnt] != ' ')
 			return (false);
 		cnt++;
