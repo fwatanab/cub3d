@@ -6,7 +6,7 @@
 /*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 03:09:20 by stakimot          #+#    #+#             */
-/*   Updated: 2024/05/01 16:06:05 by stakimot         ###   ########.fr       */
+/*   Updated: 2024/05/04 15:52:30 by stakimot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ bool	map_error_check(t_map *conf)
 	int	left;
 	int	right;
 	int	error;
-	char	**copy;
 
 	cnt = 0;
 	error = 0;
@@ -140,9 +139,8 @@ bool	map_error_check(t_map *conf)
 	}
 	if (top_bottom_check(conf->map, &left, &right, cnt) == false)
 		return (false);
-	copy = parse_map(conf->map);
-	playable_check(conf->map, copy, conf->col, conf->row, &error);
-	if (error != 0)
+	playable_check(conf, conf->col, conf->row);
+	if (conf->error_flg != 0)
 		return (false);
 	return (true);
 }

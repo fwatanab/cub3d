@@ -6,7 +6,7 @@
 /*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 16:22:54 by stakimot          #+#    #+#             */
-/*   Updated: 2024/05/01 16:05:21 by stakimot         ###   ########.fr       */
+/*   Updated: 2024/05/04 15:56:01 by stakimot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,24 @@ void	flg_check(int *l, int *l_flg, int cnt)
 	return ;
 }
 
-void	playable_check(char **map, char **copy, int col, int row, int *error)
+void	playable_check(t_map *conf, int col, int row)
 {
 	if (col < 0 || row < 0)
 		return ;
-	if (copy[col][row] == ' ')
+	if (conf->map_copy[col][row] == ' ')
 	{
-		*error = 1;
+		conf->error_flg = 1;
 		return ;
 	}
-	if (copy[col][row] == '0' || copy[col][row] == 'N' ||
-		copy[col][row] == 'S' || copy[col][row] == 'W' ||
-		copy[col][row] == 'E')
+	if (conf->map_copy[col][row] == '0' || conf->map_copy[col][row] == 'N' ||
+		conf->map_copy[col][row] == 'S' || conf->map_copy[col][row] == 'W' ||
+		conf->map_copy[col][row] == 'E')
 	{
-		copy[col][row] = 'T';
-		playable_check(map, copy, col - 1, row, error);
-		playable_check(map, copy, col + 1, row, error);
-		playable_check(map, copy, col, row - 1, error);
-		playable_check(map, copy, col, row + 1, error);
+		conf->map_copy[col][row] = 'T';
+		playable_check(conf, col - 1, row);
+		playable_check(conf, col + 1, row);
+		playable_check(conf, col, row - 1);
+		playable_check(conf, col, row + 1);
 	}
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:14:57 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/05/01 15:59:13 by stakimot         ###   ########.fr       */
+/*   Updated: 2024/05/04 15:52:56 by stakimot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef struct t_map
 	int		col;
 	int		row;
 	char	**map;
+	char	**map_copy;
+	int		error_flg;
 }	t_map;
 
 typedef struct s_camera
@@ -167,5 +169,5 @@ void		parser_print(t_map *conf);
 
 //map_error_utils
 void		flg_check(int *l, int *l_flg, int cnt);
-void		playable_check(char **map, char **copy, int col, int raw, int *error);
+void		playable_check(t_map *conf, int col, int raw);
 #endif
