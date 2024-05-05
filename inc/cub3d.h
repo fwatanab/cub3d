@@ -6,7 +6,7 @@
 /*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:14:57 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/04/16 14:30:11 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/05/04 15:52:56 by stakimot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,11 @@ typedef struct t_map
 	char	*ea;
 	t_rgb	*f;
 	t_rgb	*c;
+	int		col;
+	int		row;
 	char	**map;
+	char	**map_copy;
+	int		error_flg;
 }	t_map;
 
 typedef struct s_camera
@@ -132,6 +136,7 @@ void		perform_dda(t_camera *player, t_ray *ray, t_map *conf);
 double		get_wall_dist(t_ray *ray, t_camera *player);
 void		draw_wall(t_vars *vars, t_ray *ray, int x, char *buf);
 void		draw_floor_and_ceiling(t_vars *vars, t_tex_img *buf);
+char		**parse_map(char **file);
 
 //key_hook
 void		hook(t_vars *vars);
@@ -164,4 +169,5 @@ void		parser_print(t_map *conf);
 
 //map_error_utils
 void		flg_check(int *l, int *l_flg, int cnt);
+void		playable_check(t_map *conf, int col, int raw);
 #endif

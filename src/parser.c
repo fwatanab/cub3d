@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:35:47 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/13 18:20:42 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/05/04 15:54:17 by stakimot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,11 @@ t_map	*parser(char **argv)
 	conf->ea = get_key_value(file, "EA");
 	conf->f = parse_rgb(file, "F");
 	conf->c = parse_rgb(file, "C");
+	conf->col = -1;
+	conf->row = -1;
 	conf->map = parse_map(file);
+	conf->map_copy = parse_map(file);
+	conf->error_flg = 0;
 	array_free(file);
 	return (conf);
 }
