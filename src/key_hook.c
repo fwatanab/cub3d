@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 17:03:55 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/18 16:13:25 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:39:37 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ static int	key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == ESC)
 		close_window(vars);
-	else if (keycode == 'w')
+	else if (keycode == W)
 		move_forward_backward(vars->player, vars->conf, 'w');
-	else if (keycode == 'a')
+	else if (keycode == A)
 		strafe_left_right(vars->player, vars->conf, 'a');
-	else if (keycode == 's')
+	else if (keycode == S)
 		move_forward_backward(vars->player, vars->conf, 's');
-	else if (keycode == 'd')
+	else if (keycode == D)
 		strafe_left_right(vars->player, vars->conf, 'd');
 	else if (keycode == LEFT)
 		rotate_player(vars->player, 'L');

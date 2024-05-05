@@ -6,7 +6,7 @@
 /*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:14:57 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/04/16 14:33:57 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/05/05 15:32:48 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 # define CUB3D_H
 
 # include "../libft/inc/libft.h"
-# include "../minilibx/mlx.h"
-// # include "../minilibx/mlx_int.h"
-//# include "mlx.h" // 42 iMac
+# include "mlx.h"
 # include <math.h>
 # include <fcntl.h>
 # include <stdbool.h>
@@ -31,9 +29,13 @@
 # define ROTSPEED 0.1
 
 //hook
-# define ESC 65307
-# define LEFT 65361
-# define RIGHT 65363
+# define ESC 53
+# define W 13
+# define A 0
+# define S 1
+# define D 2
+# define LEFT 123
+# define RIGHT 124
 
 typedef struct s_rgb
 {
@@ -50,7 +52,11 @@ typedef struct t_map
 	char	*ea;
 	t_rgb	*f;
 	t_rgb	*c;
+	int		col;
+	int		row;
 	char	**map;
+	char	**map_copy;
+	int		error_flg;
 }	t_map;
 
 typedef struct s_camera
@@ -130,6 +136,7 @@ void		perform_dda(t_camera *player, t_ray *ray, t_map *conf);
 double		get_wall_dist(t_ray *ray, t_camera *player);
 void		draw_wall(t_vars *vars, t_ray *ray, int x, char *buf);
 void		draw_floor_and_ceiling(t_vars *vars, t_tex_img *buf);
+char		**parse_map(char **file);
 
 //key_hook
 void		hook(t_vars *vars);
@@ -162,4 +169,5 @@ void		parser_print(t_map *conf);
 
 //map_error_utils
 void		flg_check(int *l, int *l_flg, int cnt);
+void		playable_check(t_map *conf, int col, int raw);
 #endif
