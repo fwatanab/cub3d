@@ -28,5 +28,7 @@ void	map_free(t_map *conf)
 		free(conf->c);
 	if (conf->map)
 		array_free(conf->map);
+	if (conf->map_copy)
+		array_free(conf->map_copy);
 	free(conf);
 }
