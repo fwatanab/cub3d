@@ -6,7 +6,7 @@
 /*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 03:09:20 by stakimot          #+#    #+#             */
-/*   Updated: 2024/05/04 15:52:30 by stakimot         ###   ########.fr       */
+/*   Updated: 2024/05/05 15:23:09 by stakimot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ bool	char_check(t_map *conf)
 		j = 0;
 		while (conf->map[i][j])
 		{
-			printf("%c", conf->map[i][j]);
 			if (map_char_cmp(conf->map[i][j]) == false)
 				return (false);
 			if ((conf->col < 0 || conf->row < 0)
@@ -54,7 +53,6 @@ bool	char_check(t_map *conf)
 			}
 			j++;
 		}
-		printf("\n");
 		i++;
 	}
 	return (true);
