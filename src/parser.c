@@ -12,6 +12,16 @@
 
 #include "../inc/cub3d.h"
 
+static char	*space_trim(char *str)
+{
+	if (!str)
+		return (str);
+	while (*str == ' ' || *str == '\t' || *str == '\n'
+		|| *str == '\v' || *str == '\f' || *str == '\r')
+		str++;
+	return (str);
+}
+
 static char	*get_key_value(char **file, char *key)
 {
 	char	*result;
@@ -24,12 +34,11 @@ static char	*get_key_value(char **file, char *key)
 	key_len = ft_strlen(key);
 	while (file[i])
 	{
-		if (ft_strncmp(file[i], key, key_len) == 0)
+		str = space_trim(file[i]);
+		if (ft_strncmp(str, key, key_len) == 0)
 		{
-			str = file[i] + key_len;
-			while (*str == ' ' || *str == '\t' || *str == '\n'
-				|| *str == '\v' || *str == '\f' || *str == '\r')
-				str++;
+			str = str + key_len;
+			str = space_trim(str);
 			result = ft_strdup(str);
 			return (result);
 		}
@@ -60,16 +69,18 @@ static t_rgb	*parse_rgb(char **file, char *key)
 char	**parse_map(char **file)
 {
 	char	**map;
+	char	*str;
 
 	while (*file)
 	{
-		if (**file != '\0'
-			&& ft_strncmp(*file, "NO", 2) != 0
-			&& ft_strncmp(*file, "SO", 2) != 0
-			&& ft_strncmp(*file, "WE", 2) != 0
-			&& ft_strncmp(*file, "EA", 2) != 0
-			&& ft_strncmp(*file, "F", 1) != 0
-			&& ft_strncmp(*file, "C", 1) != 0)
+		str = space_trim(*file);
+		if (*str != '\0'
+			&& ft_strncmp(str, "NO", 2) != 0
+			&& ft_strncmp(str, "SO", 2) != 0
+			&& ft_strncmp(str, "WE", 2) != 0
+			&& ft_strncmp(str, "EA", 2) != 0
+			&& ft_strncmp(str, "F", 1) != 0
+			&& ft_strncmp(str, "C", 1) != 0)
 		{
 			map = input_map(file);
 			return (map);
