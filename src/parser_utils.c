@@ -17,6 +17,8 @@ size_t	count_semicolon(char *str)
 	size_t	count;
 
 	count = 0;
+	if (!str)
+		return (0);
 	while (*str)
 	{
 		if (*str == ',')
@@ -26,20 +28,47 @@ size_t	count_semicolon(char *str)
 	return (count);
 }
 
-void	change_rgb(t_rgb *rgb, char *str)
+static int	check_value(char **str)
+{
+	size_t i;
+	size_t j;
+
+	i = 0;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j])
+		{
+			if (ft_isalnum(str[i][j]) == 0)
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	change_rgb(t_rgb *rgb, char *str)
 {
 	char	**result;
 	size_t	i;
 
 	result = ft_split(str, ',');
+	if (!result)
+		return (1);
 	i = 0;
-	if (result)
-		rgb->r = ft_atoi(result[i++]);
-	if (result)
-		rgb->g = ft_atoi(result[i++]);
-	if (result)
-		rgb->b = ft_atoi(result[i]);
+	while (result[i])
+		i++;
+	if (i != 3 || check_value(result) == 1)
+	{
+		array_free(result);
+		return (1);
+	}
+	rgb->r = ft_atoi(result[0]);
+	rgb->g = ft_atoi(result[1]);
+	rgb->b = ft_atoi(result[2]);
 	array_free(result);
+	return (0);
 }
 
 size_t	array_size(char **str)

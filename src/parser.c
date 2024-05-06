@@ -52,16 +52,18 @@ static t_rgb	*parse_rgb(char **file, char *key)
 	t_rgb	*rgb;
 	char	*str;
 
+	str = get_key_value(file, key);
+	if (!str)
+		return (NULL);
 	rgb = malloc(sizeof(t_rgb));
 	if (!rgb)
 		error("Error: Malloc failure.");
-	str = get_key_value(file, key);
-	if (count_semicolon(str) != 2)
+	if ((count_semicolon(str) != 2) || (change_rgb(rgb, str) == 1))
 	{
 		free(str);
+		free(rgb);
 		return (NULL);
 	}
-	change_rgb(rgb, str);
 	free(str);
 	return (rgb);
 }
