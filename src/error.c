@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 19:02:13 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/05/06 20:48:22 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/05/06 20:59:00 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,12 @@ void	map_error(char *str, t_map *conf)
 
 void	check_parse(t_map *conf)
 {
-	if (!conf->no)
+	if (!conf->no || !conf->so || !conf->we || !conf->ea)
 		map_error("map_error", conf);
-	else if (!conf->so)
-		map_error("map_error", conf);
-	else if (!conf->we)
-		map_error("map_error", conf);
-	else if (!conf->ea)
-		map_error("map_error", conf);
-	else if (!conf->f)
+	else if (!conf->f || !conf->c)
 		map_error("map_error", conf);
 	else if ((conf->f->r > 0 && conf->f->r > 255) || (conf->f->g > 0
 			&& conf->f->g > 255) || (conf->f->b > 0 && conf->f->b > 255))
-		map_error("map_error", conf);
-	else if (!conf->c)
 		map_error("map_error", conf);
 	else if ((conf->c->r > 0 && conf->c->r > 255) || (conf->c->g > 0
 			&& conf->c->g > 255) || (conf->c->b > 0 && conf->c->b > 255))
