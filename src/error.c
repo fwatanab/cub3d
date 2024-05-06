@@ -27,3 +27,34 @@ void	array_free(char **str)
 		free(str[i++]);
 	free(str);
 }
+
+void	map_error(char *str, t_map *conf)
+{
+	ft_printf("%s\n", str);
+	map_free(conf);
+	exit(EXIT_FAILURE);
+}
+
+void	check_parse(t_map *conf)
+{
+	if (!conf->no)
+		map_error("map_error", conf);
+	else if (!conf->so)
+		map_error("map_error", conf);
+	else if (!conf->we)
+		map_error("map_error", conf);
+	else if (!conf->ea)
+		map_error("map_error", conf);
+	else if (!conf->f)
+		map_error("map_error", conf);
+	else if ((conf->f->r > 0 && conf->f->r > 255) || (conf->f->g > 0
+				&& conf->f->g > 255) || (conf->f->b > 0 && conf->f->b > 255))
+		map_error("map_error", conf);
+	else if (!conf->c)
+		map_error("map_error", conf);
+	else if ((conf->c->r > 0 && conf->c->r > 255) || (conf->c->g > 0
+				&& conf->c->g > 255) || (conf->c->b > 0 && conf->c->b > 255))
+		map_error("map_error", conf);
+	else if (!conf->map)
+		map_error("map_error", conf);
+}
