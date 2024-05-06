@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 09:56:25 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/13 18:20:08 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/05/06 21:05:54 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ size_t	count_semicolon(char *str)
 
 static int	check_value(char **str)
 {
-	size_t i;
-	size_t j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	while (str[i])
@@ -39,7 +39,7 @@ static int	check_value(char **str)
 		j = 0;
 		while (str[i][j])
 		{
-			if (ft_isalnum(str[i][j]) == 0)
+			if (!(str[i][j] >= '0' && str[i][j] <= '9'))
 				return (1);
 			j++;
 		}
