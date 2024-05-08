@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 09:56:25 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/05/06 21:05:54 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/05/08 15:02:22 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ char	**input_map(char **str)
 	char	**map;
 	size_t	i;
 
+	if (!str || !*str)
+		return (NULL);
 	map = malloc(sizeof(char *) * (array_size(str) + 1));
 	if (!map)
 		error("Error: Malloc failure.");

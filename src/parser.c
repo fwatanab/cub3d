@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:35:47 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/05/06 21:02:50 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/05/08 15:01:52 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static t_rgb	*parse_rgb(char **file, char *key)
 	rgb = malloc(sizeof(t_rgb));
 	if (!rgb)
 		error("Error: Malloc failure.");
-	if ((count_semicolon(str) != 2) || (change_rgb(rgb, str) == 1))
+	if (count_semicolon(str) != 2 || change_rgb(rgb, str) == 1)
 	{
 		free(str);
 		free(rgb);
@@ -72,20 +72,28 @@ char	**parse_map(char **file)
 {
 	char	**map;
 	char	*str;
+	int		count;
 
+	count = 0;
 	while (*file)
 	{
-		str = space_trim(*file);
-		if (*str != '\0'
-			&& ft_strncmp(str, "NO", 2) != 0
-			&& ft_strncmp(str, "SO", 2) != 0
-			&& ft_strncmp(str, "WE", 2) != 0
-			&& ft_strncmp(str, "EA", 2) != 0
-			&& ft_strncmp(str, "F", 1) != 0
-			&& ft_strncmp(str, "C", 1) != 0)
+		if (count >= 6)
 		{
 			map = input_map(file);
 			return (map);
+		}
+		str = space_trim(*file);
+		if (*str)
+		{
+			if (ft_strncmp(str, "NO", 2) == 0
+				|| ft_strncmp(str, "SO", 2) == 0
+				|| ft_strncmp(str, "WE", 2) == 0
+				|| ft_strncmp(str, "EA", 2) == 0
+				|| ft_strncmp(str, "F", 1) == 0
+				|| ft_strncmp(str, "C", 1) == 0)
+				count++;
+			else
+				return (NULL);
 		}
 		file++;
 	}
