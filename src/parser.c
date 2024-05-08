@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:35:47 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/05/08 15:01:52 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/05/08 15:17:23 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static t_rgb	*parse_rgb(char **file, char *key)
 char	**parse_map(char **file)
 {
 	char	**map;
-	char	*str;
+	char	*s;
 	int		count;
 
 	count = 0;
@@ -82,15 +82,12 @@ char	**parse_map(char **file)
 			map = input_map(file);
 			return (map);
 		}
-		str = space_trim(*file);
-		if (*str)
+		s = space_trim(*file);
+		if (*s)
 		{
-			if (ft_strncmp(str, "NO", 2) == 0
-				|| ft_strncmp(str, "SO", 2) == 0
-				|| ft_strncmp(str, "WE", 2) == 0
-				|| ft_strncmp(str, "EA", 2) == 0
-				|| ft_strncmp(str, "F", 1) == 0
-				|| ft_strncmp(str, "C", 1) == 0)
+			if (ft_strncmp(s, "NO", 2) == 0 || ft_strncmp(s, "SO", 2) == 0
+				|| ft_strncmp(s, "WE", 2) == 0 || ft_strncmp(s, "EA", 2) == 0
+				|| ft_strncmp(s, "F", 1) == 0 || ft_strncmp(s, "C", 1) == 0)
 				count++;
 			else
 				return (NULL);
