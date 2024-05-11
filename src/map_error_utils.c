@@ -6,7 +6,7 @@
 /*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 16:22:54 by stakimot          #+#    #+#             */
-/*   Updated: 2024/05/04 15:56:01 by stakimot         ###   ########.fr       */
+/*   Updated: 2024/05/11 11:17:16 by stakimot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	playable_check(t_map *conf, int col, int row)
 {
 	if (col < 0 || row < 0)
 		return ;
-	if (conf->map_copy[col][row] == ' ')
+	if (conf->map_copy[col][row] == ' ' || conf->map_copy[col][row] == '\0')
 	{
 		conf->error_flg = 1;
 		return ;

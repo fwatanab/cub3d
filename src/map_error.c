@@ -6,7 +6,7 @@
 /*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 03:09:20 by stakimot          #+#    #+#             */
-/*   Updated: 2024/05/05 15:23:09 by stakimot         ###   ########.fr       */
+/*   Updated: 2024/05/11 12:31:19 by stakimot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,6 @@ bool	wall_check(char *str, int *left, int *right)
 				flg_check(&l, &l_flg, cnt);
 			r = cnt;
 		}
-		if ((cnt < *left && str[cnt] != '1')
-			|| (cnt > *right && str[cnt] != '1'))
-			return (false);
 		cnt ++;
 	}
 	*left = l;
@@ -138,7 +135,7 @@ bool	map_error_check(t_map *conf)
 	if (top_bottom_check(conf->map, &left, &right, cnt) == false)
 		return (false);
 	playable_check(conf, conf->col, conf->row);
-	if (conf->error_flg != 0)
+	if (conf->error_flg != 0 || cnt * right > 8000)
 		return (false);
 	return (true);
 }
