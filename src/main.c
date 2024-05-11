@@ -6,7 +6,7 @@
 /*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:06:09 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/03/13 18:17:07 by fwatanab         ###   ########.fr       */
+/*   Updated: 2024/05/06 21:06:48 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		error("Error: Invalid number of arguments.");
 	vars.conf = parser(argv);
+	check_parse(vars.conf);
 	if (map_error_check(vars.conf) == false)
 		error("map_error");
 	vars.player = init_player(vars.conf);

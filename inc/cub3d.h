@@ -125,7 +125,8 @@ typedef struct s_draw
 
 char		**input_file(char *file);
 t_map		*parser(char **argv);
-void		change_rgb(t_rgb *rgb, char *str);
+int			change_rgb(t_rgb *rgb, char *str);
+void		check_parse(t_map *conf);
 size_t		count_semicolon(char *str);
 bool		str_all_one(char *str);
 size_t		array_len(char **str);
@@ -158,6 +159,7 @@ bool		map_error_check(t_map *conf);
 //error_free
 void		error(char *str);
 void		array_free(char **str);
+void		map_error(char *str, t_map *conf);
 void		map_free(t_map *conf);
 
 //ft_utils
