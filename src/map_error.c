@@ -6,7 +6,7 @@
 /*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 03:09:20 by stakimot          #+#    #+#             */
-/*   Updated: 2024/05/11 12:31:19 by stakimot         ###   ########.fr       */
+/*   Updated: 2024/05/11 17:00:13 by stakimot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ bool	char_check(t_map *conf)
 	int	j;
 
 	i = 0;
+	if (!conf->map)
+		return (false);
 	while (conf->map[i])
 	{
 		j = 0;
