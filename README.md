@@ -1,8 +1,7 @@
 # cub3D
 
 ## 概要
-cub3D は、Wolfenstein 3D にインスパイアされた 3D グラフィックスプロジェクトです。MiniLibX ライブラリを使用し、  
-Ray-Casting アルゴリズムを用いて迷路内の一人称視点のリアルタイスな 3D 表現を実装します。
+cub3D は、Wolfenstein 3D にインスパイアされた 3D グラフィックスプロジェクトです。MiniLibX ライブラリを使用し、Ray-Casting アルゴリズムを用いて迷路内の一人称視点のリアルタイスな 3D 表現を実装します。
 
 ## 動作環境
 - OS: Linux
