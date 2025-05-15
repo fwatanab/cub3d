@@ -6,7 +6,7 @@
 /*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 03:09:20 by stakimot          #+#    #+#             */
-/*   Updated: 2024/05/11 17:00:13 by stakimot         ###   ########.fr       */
+/*   Updated: 2025/05/16 00:47:06 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,10 +120,8 @@ bool	map_error_check(t_map *conf)
 	int	cnt;
 	int	left;
 	int	right;
-	int	error;
 
 	cnt = 0;
-	error = 0;
 	if (char_check(conf) == false)
 		return (false);
 	if (top_bottom_check(conf->map, &left, &right, cnt++) == false)
