@@ -86,6 +86,8 @@ char	**input_map(char **str)
 	char	**map;
 	size_t	i;
 
+	while (*str && !**str)
+		str++;
 	if (!str || !*str)
 		return (NULL);
 	map = malloc(sizeof(char *) * (array_size(str) + 1));
