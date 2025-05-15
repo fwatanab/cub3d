@@ -6,7 +6,7 @@
 /*   By: stakimot <stakimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:14:57 by fwatanab          #+#    #+#             */
-/*   Updated: 2024/05/05 15:32:48 by fwatanab         ###   ########.fr       */
+/*   Updated: 2025/05/16 00:44:41 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define CUB3D_H
 
 # include "../libft/inc/libft.h"
-# include "mlx.h"
+# include "../minilibx/mlx.h"
+// # include "../minilibx/mlx_int.h"
 # include <math.h>
 # include <fcntl.h>
 # include <stdbool.h>
@@ -29,13 +30,22 @@
 # define ROTSPEED 0.1
 
 //hook
-# define ESC 53
-# define W 13
-# define A 0
-# define S 1
-# define D 2
-# define LEFT 123
-# define RIGHT 124
+# define ESC 65307
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+# define LEFT 65361
+# define RIGHT 65363
+
+// IMAC
+// # define ESC 53
+// # define W 13
+// # define A 0
+// # define S 1
+// # define D 2
+// # define LEFT 123
+// # define RIGHT 124
 
 typedef struct s_rgb
 {
@@ -126,7 +136,6 @@ typedef struct s_draw
 char		**input_file(char *file);
 t_map		*parser(char **argv);
 int			change_rgb(t_rgb *rgb, char *str);
-void		check_parse(t_map *conf);
 size_t		count_semicolon(char *str);
 bool		str_all_one(char *str);
 size_t		array_len(char **str);
@@ -137,7 +146,7 @@ void		perform_dda(t_camera *player, t_ray *ray, t_map *conf);
 double		get_wall_dist(t_ray *ray, t_camera *player);
 void		draw_wall(t_vars *vars, t_ray *ray, int x, char *buf);
 void		draw_floor_and_ceiling(t_vars *vars, t_tex_img *buf);
-char		**parse_map(char **file);
+void		check_parse(t_map *conf);
 
 //key_hook
 void		hook(t_vars *vars);
@@ -159,7 +168,7 @@ bool		map_error_check(t_map *conf);
 //error_free
 void		error(char *str);
 void		array_free(char **str);
-void		map_error(char *str, t_map *conf);
+void		map_free(t_map *conf);
 void		map_free(t_map *conf);
 
 //ft_utils
